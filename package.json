@@ -7,7 +7,9 @@
     "check": "tsc --noEmit",
     "test": "python3 tools/test.py",
     "test:rpg": "python3 rpg/tools/test.py",
-    "build:rpg": "python3 rpg/tools/package.py"
+    "build:rpg": "python3 rpg/tools/package.py",
+    "test:smp": "python3 smp/tools/test.py",
+    "build:smp": "python3 smp/tools/package.py"
   },
   "devDependencies": {
     "@minecraft/server": "2.0.0",

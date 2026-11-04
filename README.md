@@ -1,5 +1,16 @@
 # Minecraft アドオン制作
 
+## SMP Chest Hub 0.1.0
+
+バニラSMP向けの独立パックです。54スロットのチェストUI、入札・即決オークション、受け取りBOX、ショップ、送金、ホーム、土地共有を追加します。
+
+- **[SMPアドオンをダウンロード](downloads/SMP-ChestHub-0.1.0.mcaddon?raw=true)**
+- [SMP導入手順・初版の制限](smp/README.md)
+- [SMP編集用ソース](downloads/SMP-ChestHub-source.zip?raw=true)
+- [SMP実機確認リスト](smp/TESTING.md)
+
+初版のオークションは通常の素材・食料・ブロックが対象です。Windows V26.60のゲーム内表示・動作は未検証です。バックアップ済みテストワールドで確認してください。
+
 ## 冒険と王国 RPG 0.1.0
 
 剣・魔法・依頼・素材売買・送金・建国・領地・国庫・防衛戦を追加した独立アドオンです。オリジナルの羊皮紙メニューと商品画像UIを含みます。
