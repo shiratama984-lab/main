@@ -1,0 +1,93 @@
+{
+  "namespace": "server_form",
+  "long_form": {
+    "type": "panel",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "controls": [
+      {
+        "normal@common_dialogs.main_panel_no_buttons": {
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$title_size": [
+            "100% - 14px",
+            10
+          ],
+          "$text_name": "#title_text",
+          "$title_text_binding_type": "none",
+          "$child_control": "server_form.long_form_panel",
+          "size": [
+            225,
+            200
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#title_text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "((not (#title_text = '§6冒険者手帳 §0[ARPG:HOME]')) and (not (#title_text = '§6城下町の市場 §0[ARPG:MARKET]')))",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "journal@common_dialogs.main_panel_no_buttons": {
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$title_size": [
+            "100% - 14px",
+            10
+          ],
+          "$text_name": "冒険者手帳",
+          "$title_text_binding_type": "none",
+          "$child_control": "arpg_forms.home_content",
+          "size": [
+            304,
+            240
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#title_text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(#title_text = '§6冒険者手帳 §0[ARPG:HOME]')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      },
+      {
+        "market@common_dialogs.main_panel_no_buttons": {
+          "$title_panel": "common_dialogs.standard_title_label",
+          "$title_size": [
+            "100% - 14px",
+            10
+          ],
+          "$text_name": "城下町の市場",
+          "$title_text_binding_type": "none",
+          "$child_control": "arpg_forms.market_content",
+          "size": [
+            304,
+            240
+          ],
+          "layer": 2,
+          "bindings": [
+            {
+              "binding_name": "#title_text"
+            },
+            {
+              "binding_type": "view",
+              "source_property_name": "(#title_text = '§6城下町の市場 §0[ARPG:MARKET]')",
+              "target_property_name": "#visible"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

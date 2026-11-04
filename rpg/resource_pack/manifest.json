@@ -1,0 +1,41 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "冒険と王国 RPG — 画像とUI",
+    "description": "独自の羊皮紙メニュー・ピクセルアイコン・魔物",
+    "uuid": "2765c9e5-552c-5dd0-a797-b992a945133e",
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      80
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "5b45d1a0-7d62-59a8-a7fb-f01efd72b0df",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "subpacks": [
+    {
+      "folder_name": "illustrated",
+      "name": "画像UI（冒険者手帳・市場）",
+      "memory_tier": 0
+    },
+    {
+      "folder_name": "standard",
+      "name": "標準UI（互換モード）",
+      "memory_tier": 1
+    }
+  ]
+}

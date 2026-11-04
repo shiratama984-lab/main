@@ -1,4 +1,21 @@
-# Millénaire Bedrock 文化体験版 0.1.0
+# Minecraft アドオン制作
+
+## 冒険と王国 RPG 0.1.0
+
+剣・魔法・依頼・素材売買・送金・建国・領地・国庫・防衛戦を追加した独立アドオンです。オリジナルの羊皮紙メニューと商品画像UIを含みます。
+
+- **[RPGアドオンをダウンロード](downloads/AdventureKingdom-RPG-0.1.0.mcaddon?raw=true)**
+- [RPG導入手順・仕様・未対応機能](rpg/README.md)
+- [RPG編集用ソース](downloads/AdventureKingdom-RPG-source.zip?raw=true)
+- [Windows V26.60 実機確認リスト](rpg/TESTING.md)
+
+公式API型検査と自動試験を実施しています。Windows V26.60のゲーム内での表示・動作は未検証です。バックアップ済みのテストワールドで確認してください。
+
+既存のMillénaire版とは別パックで、保存データも分離しています。以下に旧版を残します。
+
+---
+
+## Millénaire Bedrock 文化体験版 0.1.0
 
 ## ダウンロード
 

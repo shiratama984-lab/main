@@ -1,0 +1,337 @@
+{
+  "namespace": "arpg_forms",
+  "home_content": {
+    "type": "panel",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "controls": [
+      {
+        "paper": {
+          "type": "image",
+          "texture": "textures/arpg/parchment",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "layer": 0
+        }
+      },
+      {
+        "summary": {
+          "type": "label",
+          "text": "#form_text",
+          "color": [
+            0.2,
+            0.15,
+            0.1
+          ],
+          "font_scale_factor": 0.8,
+          "size": [
+            "100% - 32px",
+            30
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            12
+          ],
+          "layer": 3,
+          "text_alignment": "center",
+          "bindings": [
+            {
+              "binding_name": "#form_text"
+            }
+          ]
+        }
+      },
+      {
+        "grid": {
+          "type": "grid",
+          "size": [
+            264,
+            156
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            45
+          ],
+          "grid_dimensions": [
+            3,
+            2
+          ],
+          "grid_item_template": "arpg_forms.home_button",
+          "grid_fill_direction": "horizontal",
+          "collection_name": "form_buttons",
+          "bindings": [
+            {
+              "binding_name": "#form_button_length",
+              "binding_name_override": "#maximum_grid_items"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "home_button": {
+    "type": "panel",
+    "size": [
+      88,
+      78
+    ],
+    "controls": [
+      {
+        "select@common_buttons.light_text_button": {
+          "size": [
+            84,
+            74
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "$button_text": "",
+          "$button_text_binding_type": "none",
+          "$pressed_button_name": "button.form_button_click",
+          "layer": 1,
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      },
+      {
+        "icon": {
+          "type": "image",
+          "size": [
+            32,
+            32
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            5
+          ],
+          "layer": 3,
+          "bindings": [
+            {
+              "binding_name": "#form_button_texture",
+              "binding_name_override": "#texture",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            },
+            {
+              "binding_name": "#form_button_texture_file_system",
+              "binding_name_override": "#texture_file_system",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      },
+      {
+        "caption": {
+          "type": "label",
+          "text": "#form_button_text",
+          "size": [
+            80,
+            24
+          ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [
+            0,
+            -5
+          ],
+          "font_scale_factor": 0.8,
+          "color": [
+            0.16,
+            0.13,
+            0.1
+          ],
+          "text_alignment": "center",
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#form_button_text",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "market_content": {
+    "type": "panel",
+    "size": [
+      "100%",
+      "100%"
+    ],
+    "controls": [
+      {
+        "paper": {
+          "type": "image",
+          "texture": "textures/arpg/parchment",
+          "size": [
+            "100%",
+            "100%"
+          ],
+          "layer": 0
+        }
+      },
+      {
+        "summary": {
+          "type": "label",
+          "text": "#form_text",
+          "color": [
+            0.2,
+            0.15,
+            0.1
+          ],
+          "font_scale_factor": 0.8,
+          "size": [
+            "100% - 32px",
+            30
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            12
+          ],
+          "layer": 3,
+          "text_alignment": "center",
+          "bindings": [
+            {
+              "binding_name": "#form_text"
+            }
+          ]
+        }
+      },
+      {
+        "grid": {
+          "type": "grid",
+          "size": [
+            264,
+            156
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            45
+          ],
+          "grid_dimensions": [
+            3,
+            3
+          ],
+          "grid_item_template": "arpg_forms.market_button",
+          "grid_fill_direction": "horizontal",
+          "collection_name": "form_buttons",
+          "bindings": [
+            {
+              "binding_name": "#form_button_length",
+              "binding_name_override": "#maximum_grid_items"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "market_button": {
+    "type": "panel",
+    "size": [
+      88,
+      52
+    ],
+    "controls": [
+      {
+        "select@common_buttons.light_text_button": {
+          "size": [
+            84,
+            48
+          ],
+          "anchor_from": "center",
+          "anchor_to": "center",
+          "$button_text": "",
+          "$button_text_binding_type": "none",
+          "$pressed_button_name": "button.form_button_click",
+          "layer": 1,
+          "bindings": [
+            {
+              "binding_type": "collection_details",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      },
+      {
+        "icon": {
+          "type": "image",
+          "size": [
+            24,
+            24
+          ],
+          "anchor_from": "top_middle",
+          "anchor_to": "top_middle",
+          "offset": [
+            0,
+            5
+          ],
+          "layer": 3,
+          "bindings": [
+            {
+              "binding_name": "#form_button_texture",
+              "binding_name_override": "#texture",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            },
+            {
+              "binding_name": "#form_button_texture_file_system",
+              "binding_name_override": "#texture_file_system",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      },
+      {
+        "caption": {
+          "type": "label",
+          "text": "#form_button_text",
+          "size": [
+            82,
+            18
+          ],
+          "anchor_from": "bottom_middle",
+          "anchor_to": "bottom_middle",
+          "offset": [
+            0,
+            -5
+          ],
+          "font_scale_factor": 0.65,
+          "color": [
+            0.16,
+            0.13,
+            0.1
+          ],
+          "text_alignment": "center",
+          "layer": 4,
+          "bindings": [
+            {
+              "binding_name": "#form_button_text",
+              "binding_type": "collection",
+              "binding_collection_name": "form_buttons"
+            }
+          ]
+        }
+      }
+    ]
+  }
+}

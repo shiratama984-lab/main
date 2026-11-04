@@ -5,7 +5,9 @@
   "scripts": {
     "build": "python3 tools/package.py",
     "check": "tsc --noEmit",
-    "test": "python3 tools/test.py"
+    "test": "python3 tools/test.py",
+    "test:rpg": "python3 rpg/tools/test.py",
+    "build:rpg": "python3 rpg/tools/package.py"
   },
   "devDependencies": {
     "@minecraft/server": "2.0.0",

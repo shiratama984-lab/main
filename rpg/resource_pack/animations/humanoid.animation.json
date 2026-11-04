@@ -1,0 +1,38 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.arpg.walk": {
+      "loop": true,
+      "bones": {
+        "rightArm": {
+          "rotation": [
+            "math.cos(query.modified_distance_moved * 38.17) * -65 * query.modified_move_speed",
+            0,
+            0
+          ]
+        },
+        "leftArm": {
+          "rotation": [
+            "math.cos(query.modified_distance_moved * 38.17) * 65 * query.modified_move_speed",
+            0,
+            0
+          ]
+        },
+        "rightLeg": {
+          "rotation": [
+            "math.cos(query.modified_distance_moved * 38.17) * 65 * query.modified_move_speed",
+            0,
+            0
+          ]
+        },
+        "leftLeg": {
+          "rotation": [
+            "math.cos(query.modified_distance_moved * 38.17) * -65 * query.modified_move_speed",
+            0,
+            0
+          ]
+        }
+      }
+    }
+  }
+}

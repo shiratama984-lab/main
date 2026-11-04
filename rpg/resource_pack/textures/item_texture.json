@@ -1,0 +1,15 @@
+{
+  "resource_pack_name": "adventure_realm",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "arpg_book": {
+      "textures": "textures/arpg/book"
+    },
+    "arpg_staff": {
+      "textures": "textures/arpg/staff"
+    },
+    "arpg_sword": {
+      "textures": "textures/arpg/sword"
+    }
+  }
+}

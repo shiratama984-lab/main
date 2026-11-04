@@ -1,0 +1,58 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "冒険と王国 RPG 0.1.0",
+    "description": "剣・魔法・依頼・経済・建国 / 非公式オリジナル試作版",
+    "uuid": "455a751d-9d7d-587e-8df1-26a776b0481b",
+    "version": [
+      0,
+      1,
+      0
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      80
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "4f6c291a-a9c2-5b6b-8a2b-34cd97174a3d",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "87b0dbb6-6e0e-574a-8f1b-6c88aa09bcd8",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.0.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    },
+    {
+      "uuid": "2765c9e5-552c-5dd0-a797-b992a945133e",
+      "version": [
+        0,
+        1,
+        0
+      ]
+    }
+  ]
+}

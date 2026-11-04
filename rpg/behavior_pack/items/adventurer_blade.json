@@ -1,0 +1,27 @@
+{
+  "format_version": "1.21.80",
+  "minecraft:item": {
+    "description": {
+      "identifier": "arpg:adventurer_blade",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "§f冒険者の剣"
+      },
+      "minecraft:icon": "arpg_sword",
+      "minecraft:max_stack_size": 1,
+      "minecraft:damage": 7,
+      "minecraft:durability": {
+        "max_durability": 384
+      },
+      "minecraft:enchantable": {
+        "slot": "sword",
+        "value": 8
+      },
+      "minecraft:hand_equipped": true
+    }
+  }
+}

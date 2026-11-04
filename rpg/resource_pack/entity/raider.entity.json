@@ -1,0 +1,34 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "arpg:raider",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/raider"
+      },
+      "geometry": {
+        "default": "geometry.arpg.humanoid"
+      },
+      "animations": {
+        "walk": "animation.arpg.walk",
+        "look": "animation.common.look_at_target"
+      },
+      "scripts": {
+        "animate": [
+          "walk",
+          "look"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.arpg"
+      ],
+      "spawn_egg": {
+        "base_color": "#645142",
+        "overlay_color": "#dcae53"
+      }
+    }
+  }
+}
