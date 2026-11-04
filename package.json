@@ -16,5 +16,8 @@
     "@minecraft/server-ui": "2.0.0",
     "@minecraft/vanilla-data": "^1.21.80",
     "typescript": "5.8.3"
-  }
+  },
+  "workspaces": [
+    "smp"
+  ]
 }

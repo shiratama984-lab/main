@@ -1,0 +1,331 @@
+{
+  "namespace": "smp_native_inventory",
+  "inventory_label": {
+    "type": "label",
+    "text": "container.inventory",
+    "color": "$title_text_color",
+    "layer": 2,
+    "anchor_from": "bottom_left",
+    "anchor_to": "bottom_left",
+    "ignored": "(not $smp_show_inventory)"
+  },
+  "hotbar_items": {
+    "type": "stack_panel",
+    "size": [
+      "default",
+      18
+    ],
+    "orientation": "horizontal",
+    "collection_name": "form_buttons",
+    "$size": "$condition",
+    "$start_index": "$smp_slot_count",
+    "ignored": "(not $smp_show_inventory)",
+    "controls": [
+      {
+        "0@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "$start_index"
+        }
+      },
+      {
+        "1@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 1)"
+        }
+      },
+      {
+        "2@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 2)"
+        }
+      },
+      {
+        "3@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 3)"
+        }
+      },
+      {
+        "4@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 4)"
+        }
+      },
+      {
+        "5@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 5)"
+        }
+      },
+      {
+        "6@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 6)"
+        }
+      },
+      {
+        "7@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 7)"
+        }
+      },
+      {
+        "8@smp_native_inventory.inventory_item_panel": {
+          "collection_index": "($start_index + 8)"
+        }
+      }
+    ],
+    "layer": 1
+  },
+  "inventory_items": {
+    "type": "stack_panel",
+    "orientation": "vertical",
+    "size": [
+      "100%",
+      "default"
+    ],
+    "ignored": "(not $smp_show_inventory)",
+    "$size": "$condition",
+    "$start_index": "$smp_slot_count",
+    "controls": [
+      {
+        "stack_1": {
+          "type": "stack_panel",
+          "size": [
+            "default",
+            18
+          ],
+          "orientation": "horizontal",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "0@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 9)"
+              }
+            },
+            {
+              "1@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 10)"
+              }
+            },
+            {
+              "2@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 11)"
+              }
+            },
+            {
+              "3@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 12)"
+              }
+            },
+            {
+              "4@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 13)"
+              }
+            },
+            {
+              "5@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 14)"
+              }
+            },
+            {
+              "6@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 15)"
+              }
+            },
+            {
+              "7@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 16)"
+              }
+            },
+            {
+              "8@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 17)"
+              }
+            }
+          ],
+          "layer": 1
+        }
+      },
+      {
+        "stack_2": {
+          "type": "stack_panel",
+          "size": [
+            "default",
+            18
+          ],
+          "orientation": "horizontal",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "0@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 18)"
+              }
+            },
+            {
+              "1@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 19)"
+              }
+            },
+            {
+              "2@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 20)"
+              }
+            },
+            {
+              "3@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 21)"
+              }
+            },
+            {
+              "4@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 22)"
+              }
+            },
+            {
+              "5@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 23)"
+              }
+            },
+            {
+              "6@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 24)"
+              }
+            },
+            {
+              "7@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 25)"
+              }
+            },
+            {
+              "8@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 26)"
+              }
+            }
+          ],
+          "layer": 1
+        }
+      },
+      {
+        "stack_3": {
+          "type": "stack_panel",
+          "size": [
+            "default",
+            18
+          ],
+          "orientation": "horizontal",
+          "collection_name": "form_buttons",
+          "controls": [
+            {
+              "0@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 27)"
+              }
+            },
+            {
+              "1@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 28)"
+              }
+            },
+            {
+              "2@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 29)"
+              }
+            },
+            {
+              "3@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 30)"
+              }
+            },
+            {
+              "4@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 31)"
+              }
+            },
+            {
+              "5@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 32)"
+              }
+            },
+            {
+              "6@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 33)"
+              }
+            },
+            {
+              "7@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 34)"
+              }
+            },
+            {
+              "8@smp_native_inventory.inventory_item_panel": {
+                "collection_index": "($start_index + 35)"
+              }
+            }
+          ],
+          "layer": 1
+        }
+      }
+    ]
+  },
+  "inventory_item_panel": {
+    "type": "panel",
+    "size": [
+      18,
+      18
+    ],
+    "layer": 1,
+    "controls": [
+      {
+        "bg@smp_native.cell": {}
+      },
+      {
+        "inventory_button_amount@smp_native.inventory_button_amount": {}
+      },
+      {
+        "inventory_item@smp_native_inventory.inventory_item": {}
+      }
+    ]
+  },
+  "inventory_item@common.button": {
+    "$pressed_button_name": "button.form_button_click",
+    "bindings": [
+      {
+        "binding_name": "#form_button_text",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      },
+      {
+        "binding_type": "collection_details",
+        "binding_collection_name": "form_buttons"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (#form_button_text = ''))",
+        "target_property_name": "#visible"
+      }
+    ],
+    "$aux_id": [
+      {
+        "binding_name": "#form_button_texture",
+        "binding_type": "collection",
+        "binding_collection_name": "form_buttons"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "(not (('%.8s' * #form_button_texture) = 'textures'))",
+        "target_property_name": "#visible"
+      },
+      {
+        "binding_type": "view",
+        "source_property_name": "((#form_button_texture - (#form_button_texture % 65536)) / 65536)",
+        "target_property_name": "#item_id_aux"
+      }
+    ],
+    "default_control": "default",
+    "hover_control": "hover",
+    "pressed_control": "pressed",
+    "controls": [
+      {
+        "default@smp_native.default_control": {}
+      },
+      {
+        "hover@smp_native.hover_control": {}
+      },
+      {
+        "pressed@smp_native.pressed_control": {}
+      }
+    ]
+  }
+}

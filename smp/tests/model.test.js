@@ -2,15 +2,28 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import * as m from '../behavior_pack/scripts/model.js';
 import { Store, SAVE_KEY } from '../behavior_pack/scripts/store.js';
-function setup() { const db = new Map(), port = { getDynamicProperty: k => db.get(k), setDynamicProperty: (k, v) => db.set(k, v) }, st = new Store(port); st.transaction(s => { for (const id of ['seller', 'bob', 'carol']) {
-    const p = m.register(s, id, id);
-    m.mint(s, p, 900);
-} }); return { st, port, db }; }
+function setup() {
+    const db = new Map(), port = { getDynamicProperty: k => db.get(k), setDynamicProperty: (k, v) => db.set(k, v) }, st = new Store(port);
+    st.transaction(s => {
+        for (const id of ['seller', 'bob', 'carol']) {
+            const p = m.register(s, id, id);
+            m.mint(s, p, 900);
+        }
+    });
+    return { st, port, db };
+}
 const item = { id: 'minecraft:diamond', count: 2 };
 function create(st, start = 100, buyout = null) { st.transaction(s => m.createLot(s, s.players.seller, item, start, buyout, 300000, 1000)); }
 test('bids hold currency, higher bidders refund previous bidder, self-raises charge only delta', () => { const { st } = setup(); create(st); st.transaction(s => m.bid(s, s.players.bob, 'a1', 100, 2000)); assert.equal(st.state.players.bob.balance, 900); st.transaction(s => m.bid(s, s.players.carol, 'a1', 105, 2001)); assert.equal(st.state.players.bob.balance, 1000); assert.equal(st.state.players.carol.balance, 895); st.transaction(s => m.bid(s, s.players.carol, 'a1', 111, 2002)); assert.equal(st.state.players.carol.balance, 889); assert.equal(st.state.supply, 3000); assert.doesNotThrow(() => m.validate(st.state)); });
-test('self-bidding, low/negative/fractional bids, expired bids and stale buyout are rejected atomically', () => { const { st } = setup(); create(st, 100, 250); for (const [id, n, now] of [['seller', 100, 2000], ['bob', 99, 2000], ['bob', -1, 2000], ['bob', 1.5, 2000], ['bob', 100, 301000]])
-    assert.throws(() => st.transaction(s => m.bid(s, s.players[id], 'a1', n, now))); assert.throws(() => st.transaction(s => m.buyNow(s, s.players.bob, 'a1', 251, 2000))); assert.equal(st.state.players.bob.balance, 1000); assert.equal(st.state.lots.a1.bid, 0); });
+test('self-bidding, low/negative/fractional bids, expired bids and stale buyout are rejected atomically', () => {
+    const { st } = setup();
+    create(st, 100, 250);
+    for (const [id, n, now] of [['seller', 100, 2000], ['bob', 99, 2000], ['bob', -1, 2000], ['bob', 1.5, 2000], ['bob', 100, 301000]])
+        assert.throws(() => st.transaction(s => m.bid(s, s.players[id], 'a1', n, now)));
+    assert.throws(() => st.transaction(s => m.buyNow(s, s.players.bob, 'a1', 251, 2000)));
+    assert.equal(st.state.players.bob.balance, 1000);
+    assert.equal(st.state.lots.a1.bid, 0);
+});
 test('buyout refunds the prior bidder and immediately pays the offline seller exactly once', () => { const { st } = setup(); create(st, 100, 250); st.transaction(s => m.bid(s, s.players.bob, 'a1', 100, 2000)); st.transaction(s => m.buyNow(s, s.players.carol, 'a1', 250, 2001)); assert.equal(st.state.players.seller.balance, 1250); assert.equal(st.state.players.bob.balance, 1000); assert.equal(st.state.players.carol.balance, 750); assert.equal(st.state.lots.a1.recipient, 'carol'); assert.throws(() => st.transaction(s => m.buyNow(s, s.players.bob, 'a1', 250, 2002))); st.transaction(s => m.settleDue(s, 9999999)); assert.equal(st.state.players.seller.balance, 1250); });
 test('auction expiration survives restart; winner and no-bid seller get distinct delivery records', () => { const { st, port } = setup(); create(st); create(st); st.transaction(s => m.bid(s, s.players.bob, 'a1', 100, 2000)); const next = new Store(port); next.transaction(s => m.settleDue(s, 400000)); assert.equal(next.state.lots.a1.recipient, 'bob'); assert.equal(next.state.lots.a2.recipient, 'seller'); assert.equal(next.state.players.seller.balance, 1100); assert.equal(next.transaction(s => m.settleDue(s, 500000)), 0); });
 test('cancel only before bids; delivery is recipient-only and cannot be collected twice', () => { const { st } = setup(); create(st); create(st); st.transaction(s => m.cancel(s, s.players.seller, 'a1', 2000)); assert.throws(() => st.transaction(s => m.claimDelivery(s, s.players.bob, 'a1'))); const got = st.transaction(s => m.claimDelivery(s, s.players.seller, 'a1')); assert.deepEqual(got, item); assert.throws(() => st.transaction(s => m.claimDelivery(s, s.players.seller, 'a1'))); st.transaction(s => m.bid(s, s.players.bob, 'a2', 100, 2000)); assert.throws(() => st.transaction(s => m.cancel(s, s.players.seller, 'a2', 2001))); });
@@ -19,25 +32,46 @@ test('supply invariant detects inflation and all mutations roll back on failed d
 test('daily reward uses midnight Japan time and transfer preserves supply', () => { const { st } = setup(); const before = Date.UTC(2026, 10, 4, 14, 59, 59), after = Date.UTC(2026, 10, 4, 15, 0, 0); st.transaction(s => m.daily(s, s.players.bob, before)); assert.throws(() => st.transaction(s => m.daily(s, s.players.bob, before))); st.transaction(s => m.daily(s, s.players.bob, after)); assert.equal(st.state.players.bob.balance, 1200); st.transaction(s => m.transfer(s, 'bob', 'carol', 200)); assert.equal(st.state.players.carol.balance, 1200); assert.equal(st.state.supply, 3200); });
 test('shop buy/sell adjusts supply and rejects invalid counts', () => { const { st } = setup(); st.transaction(s => m.trade(s, s.players.bob, 'iron', 'buy', 2)); assert.equal(st.state.players.bob.balance, 800); assert.equal(st.state.supply, 2800); st.transaction(s => m.trade(s, s.players.bob, 'iron', 'sell', 2)); assert.equal(st.state.players.bob.balance, 864); assert.equal(st.state.supply, 2864); assert.throws(() => st.transaction(s => m.trade(s, s.players.bob, 'iron', 'sell', NaN))); });
 test('claim boundaries, trusted access and release require the owner', () => { const { st } = setup(); const key = st.transaction(s => m.buyClaim(s, s.players.seller, 'minecraft:overworld', -1, -17)); assert.equal(key, 'minecraft:overworld:-1:-2'); assert.equal(m.mayUse(st.state, 'bob', 'minecraft:overworld', -1, -17), false); st.transaction(s => m.trust(s, s.players.seller, key, 'bob', true)); assert.equal(m.mayUse(st.state, 'bob', 'minecraft:overworld', -1, -17), true); assert.throws(() => st.transaction(s => m.abandon(s, s.players.bob, key))); st.transaction(s => m.abandon(s, s.players.seller, key)); assert.equal(m.mayUse(st.state, 'carol', 'minecraft:overworld', -1, -17), true); });
-test('homes limit, overwrites and prototype names are handled without corrupting the map', () => { const { st } = setup(); for (const name of ['a', 'b', 'c'])
-    st.transaction(s => m.setHome(s.players.bob, name, 'minecraft:overworld', { x: 0, y: 64, z: 0 })); assert.throws(() => st.transaction(s => m.setHome(s.players.bob, 'd', 'minecraft:overworld', { x: 0, y: 64, z: 0 }))); assert.throws(() => st.transaction(s => m.setHome(s.players.bob, '__proto__', 'minecraft:overworld', { x: 0, y: 64, z: 0 }))); st.transaction(s => m.setHome(s.players.bob, 'a', 'minecraft:overworld', { x: 1, y: 64, z: 0 })); assert.equal(st.state.players.bob.homes.a.x, 1); });
+test('homes limit, overwrites and prototype names are handled without corrupting the map', () => {
+    const { st } = setup();
+    for (const name of ['a', 'b', 'c'])
+        st.transaction(s => m.setHome(s.players.bob, name, 'minecraft:overworld', { x: 0, y: 64, z: 0 }));
+    assert.throws(() => st.transaction(s => m.setHome(s.players.bob, 'd', 'minecraft:overworld', { x: 0, y: 64, z: 0 })));
+    assert.throws(() => st.transaction(s => m.setHome(s.players.bob, '__proto__', 'minecraft:overworld', { x: 0, y: 64, z: 0 })));
+    st.transaction(s => m.setHome(s.players.bob, 'a', 'minecraft:overworld', { x: 1, y: 64, z: 0 }));
+    assert.equal(st.state.players.bob.homes.a.x, 1);
+});
 test('corrupt saves stay untouched and storage capacity failure restores the last snapshot', () => { const { st, port, db } = setup(); assert.throws(() => st.transaction(s => s.players.bob.name = '王'.repeat(11000))); assert.equal(st.state.players.bob.name, 'bob'); db.set(SAVE_KEY, '{bad'); assert.throws(() => new Store(port)); assert.equal(db.get(SAVE_KEY), '{bad'); });
-test('many bidding and closing sequences preserve the total coin supply', () => { const { st } = setup(); for (let round = 0; round < 12; round++) {
-    const now = round * 1000000, id = 'a' + st.state.nextLot;
-    st.transaction(s => m.createLot(s, s.players.seller, item, 1, null, 300000, now));
-    for (let b = 1; b <= 8; b++)
-        st.transaction(s => m.bid(s, s.players[b % 2 ? 'bob' : 'carol'], id, b * 3, now + b));
-    st.transaction(s => m.settleDue(s, now + 300000));
-    st.transaction(s => m.claimDelivery(s, s.players[s.lots[id].recipient], id));
-    assert.equal(Object.values(st.state.players).reduce((n, p) => n + p.balance, 0), st.state.supply);
-} assert.equal(Object.keys(st.state.lots).length, 0); });
-test('reserved storage headroom lets auctions settle even when new data reaches capacity', () => { const { st } = setup(); create(st); st.transaction(s => m.bid(s, s.players.bob, 'a1', 100, 2000)); let low = 0, high = 30000; while (low < high) {
-    const n = Math.ceil((low + high) / 2);
-    try {
-        st.transaction(s => s.players.seller.name = 'x'.repeat(n));
-        low = n;
+test('many bidding and closing sequences preserve the total coin supply', () => {
+    const { st } = setup();
+    for (let round = 0; round < 12; round++) {
+        const now = round * 1000000, id = 'a' + st.state.nextLot;
+        st.transaction(s => m.createLot(s, s.players.seller, item, 1, null, 300000, now));
+        for (let b = 1; b <= 8; b++)
+            st.transaction(s => m.bid(s, s.players[b % 2 ? 'bob' : 'carol'], id, b * 3, now + b));
+        st.transaction(s => m.settleDue(s, now + 300000));
+        st.transaction(s => m.claimDelivery(s, s.players[s.lots[id].recipient], id));
+        assert.equal(Object.values(st.state.players).reduce((n, p) => n + p.balance, 0), st.state.supply);
     }
-    catch {
-        high = n - 1;
+    assert.equal(Object.keys(st.state.lots).length, 0);
+});
+test('reserved storage headroom lets auctions settle even when new data reaches capacity', () => {
+    const { st } = setup();
+    create(st);
+    st.transaction(s => m.bid(s, s.players.bob, 'a1', 100, 2000));
+    let low = 0, high = 30000;
+    while (low < high) {
+        const n = Math.ceil((low + high) / 2);
+        try {
+            st.transaction(s => s.players.seller.name = 'x'.repeat(n));
+            low = n;
+        }
+        catch {
+            high = n - 1;
+        }
     }
-} assert.ok(low > 28000); st.transaction(s => m.settleDue(s, 400000)); assert.equal(st.state.lots.a1.status, 'sold'); assert.equal(st.state.players.seller.balance, 1100); });
+    assert.ok(low > 28000);
+    st.transaction(s => m.settleDue(s, 400000));
+    assert.equal(st.state.lots.a1.status, 'sold');
+    assert.equal(st.state.players.seller.balance, 1100);
+});

@@ -1,0 +1,44 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { player, players, ItemStack, hooks, dimension, world, registeredCommands, CommandPermissionLevel } from './mock-server.js';
+import { responses, forms } from './mock-ui.js';
+import { store, showHome, showInbox, teleports, heartbeat } from '../behavior_pack/scripts/main.js';
+import { read, change, toggle } from '../behavior_pack/scripts/survival/core.js';
+import { tpa, machine } from '../behavior_pack/scripts/hub.js';
+import * as m from '../behavior_pack/scripts/model.js';
+import { Store } from '../behavior_pack/scripts/store.js';
+let now = 1000000;
+Date.now = () => now;
+const a = player('alice'), b = player('bob');
+players.push(a, b);
+async function menu(p, ...r) { responses.push(...r); await showHome(p); }
+function count(p, id) { return p.inventory.slots.reduce((n, s) => n + (s?.typeId === id ? s.amount : 0), 0); }
+test('V3-style menu reaches status, skills, TPA, bazaar and settings without duplicate actions', async () => { await menu(a, { canceled: true }); await menu(b, { canceled: true }); const home = forms[0]; assert.equal(home.buttons.length, 90); for (const [slot, text] of [[19, 'ステータス'], [21, 'スキル'], [29, 'TPA'], [31, 'バザー'], [33, 'ミニゲーム'], [47, '設定']])
+    assert.ok(home.buttons[slot].text.includes(text)); });
+test('mining awards actual event XP, player-placed ore does not, and crops require maturity', () => { const event = { player: a, block: { location: { x: 8, y: 64, z: 8 } }, brokenBlockPermutation: { type: { id: 'minecraft:diamond_ore' }, getState: () => 0 } }; hooks.breakAfter[0](event); assert.equal(read(a).mine, 30); hooks.place[0]({ player: a, block: { location: { x: 8, y: 64, z: 8 } } }); hooks.breakAfter[0](event); assert.equal(read(a).mine, 30); const crop = { ...event, brokenBlockPermutation: { type: { id: 'minecraft:beetroot' }, getState: () => 3 } }; hooks.breakAfter[0](crop); assert.equal(read(a).farm, 0); crop.brokenBlockPermutation.getState = () => 7; hooks.breakAfter[0](crop); assert.equal(read(a).farm, 10); });
+test('skill unlock through the chest UI charges points and applies the actual effect hook', async () => { change(a, d => { d.lv = 10; d.points = 9; }); await menu(a, { selection: 21 }, { selection: 10 }, { selection: 0 }, { canceled: true }); assert.ok(read(a).active.includes('mine_haste1')); assert.equal(read(a).points, 8); a.inventory.setItem(0, new ItemStack('minecraft:diamond_pickaxe', 1)); a.selectedSlotIndex = 0; for (const loop of hooks.intervals.filter(x => x.n === 20))
+    loop.f(); assert.equal(a.effects.get('haste').amplifier, 0); });
+test('safe hotbar option never overwrites a held stack and moves only the menu item', () => { change(a, d => { d.menuHotbar = true; }); a.inventory.setItem(1, new ItemStack('smp:menu', 1)); a.inventory.setItem(8, new ItemStack('minecraft:diamond', 10)); for (const loop of hooks.intervals.filter(x => x.n === 20))
+    loop.f(); assert.equal(a.inventory.getItem(8).typeId, 'minecraft:diamond'); assert.equal(count(a, 'smp:menu'), 1); a.inventory.setItem(8, undefined); for (const loop of hooks.intervals.filter(x => x.n === 20))
+    loop.f(); assert.equal(a.inventory.getItem(8).typeId, 'smp:menu'); assert.equal(count(a, 'smp:menu'), 1); });
+test('TPA requires explicit recipient approval and uses the safe five-second teleport queue', async () => { responses.push({ selection: 0 }, { canceled: true }); await tpa(a); assert.equal(teleports.size, 0); responses.push({ selection: 36 }, { selection: 0 }); await tpa(b); assert.ok(teleports.has(a.id)); now += 5001; heartbeat(); assert.equal(a.teleported, 1); });
+test('physical barter flows through inventory escrow, dual inbox and exact payment', async () => { a.inventory.setItem(0, new ItemStack('minecraft:diamond', 4)); b.inventory.setItem(0, new ItemStack('minecraft:emerald', 5)); await menu(a, { selection: 31 }, { selection: 46 }, { selection: 0 }, { formValues: ['2', 0, '5'] }, { selection: 0 }, { canceled: true }); assert.equal(count(a, 'minecraft:diamond'), 2); await menu(b, { selection: 31 }, { selection: 0 }, { selection: 0 }, { canceled: true }); assert.equal(count(b, 'minecraft:emerald'), 0); assert.equal(Object.keys(store.state.parcels).length, 2); responses.push({ selection: 0 }, { canceled: true }); await showInbox(b); assert.equal(count(b, 'minecraft:diamond'), 2); responses.push({ selection: 0 }, { canceled: true }); await showInbox(a); assert.equal(count(a, 'minecraft:emerald'), 5); assert.equal(Object.keys(store.state.parcels).length, 0); });
+test('slot payout is durable even if the player leaves before the visual sequence ends', async () => { const properties = new Map(), entity = { id: 'machine1', setProperty: (k, v) => properties.set(k, v) }; const original = Math.random; Math.random = () => .95; responses.push({ selection: 0 }); const before = store.state.players.alice.balance; await machine(a, entity); Math.random = original; assert.equal(store.state.players.alice.balance, before + 35); assert.equal(properties.get('smp:slot_state'), 'spinning'); players.splice(players.indexOf(a), 1); for (const timer of hooks.timeouts.splice(0))
+    timer(); assert.equal(properties.get('smp:slot_state'), 'idle'); assert.equal(new Store(world).state.players.alice.balance, before + 35); players.push(a); });
+test('operator commands have operator permissions while menu commands work without cheats', () => { for (const name of ['smp:summon_slot', 'smp:givexp', 'smp:level'])
+    assert.equal(registeredCommands.get(name).permissionLevel, CommandPermissionLevel.GameDirectors); for (const name of ['smp:menu', 'smp:skills', 'smp:bazaar', 'smp:tpa']) {
+    assert.equal(registeredCommands.get(name).permissionLevel, CommandPermissionLevel.Any);
+    assert.equal(registeredCommands.get(name).cheatsRequired, false);
+} });
+test('inventory preview preserves stack metadata and can drive listing from the lower inventory', async () => { a.inventory.setItem(0, new ItemStack('minecraft:diamond', 3)); responses.push({ selection: 54 }, { formValues: ['1', '10', '20', 0] }, { selection: 0 }, { canceled: true }); const { showSell } = await import('../behavior_pack/scripts/main.js'); await showSell(a); assert.equal(count(a, 'minecraft:diamond'), 2); const listing = Object.values(store.state.lots).find(l => l.item.id === 'minecraft:diamond'); assert.equal(listing.item.count, 1); const { encoded } = await import('../behavior_pack/scripts/chest.js'); assert.equal(encoded('テスト', 2, 75), 'stack#02dur#75§rテスト'); });
+function mockMob(id) { const dp = new Map(), tags = new Set(), effects = []; return { id, dp, tags, effects, typeId: 'minecraft:zombie', nameTag: '', isValid: true, location: { x: 2, y: 64, z: 0 }, dimension, getDynamicProperty: k => dp.get(k), setDynamicProperty: (k, v) => dp.set(k, v), hasTag: t => tags.has(t), addTag: t => tags.add(t), getComponent: () => ({ currentValue: 20, effectiveMax: 20 }), addEffect: (...args) => effects.push(args), applyKnockback() { } }; }
+test('enhanced mobs are processed once per scan and cannot alter a claimed block', () => { const mob = mockMob('traitMob'); mob.dp.set('smp:traits_v2', 'swift'); const old = dimension.getEntities; dimension.getEntities = () => [mob, mob]; const pulse = hooks.intervals.find(x => x.n === 40).f; pulse(); assert.equal(mob.effects.length, 1); store.transaction(s => { m.mint(s, s.players.alice, 200); m.buyClaim(s, s.players.alice, dimension.id, 0, 0); s.settings = { enhancedMobs: true, mobTerrain: true }; }); world.gameRules = { mobGriefing: true }; mob.dp.set('smp:traits_v2', 'minecrafter'); const get = dimension.getBlock; let reads = 0; dimension.getBlock = (...args) => { reads++; return get.apply(dimension, args); }; pulse(); assert.equal(reads, 0); dimension.getBlock = get; dimension.getEntities = old; });
+test('summoned allies are capped per parent and cannot recursively acquire summon traits', () => { const mob = mockMob('summoner'); mob.dp.set('smp:traits_v2', 'summon_ally'); const children = []; dimension.spawnEntity = () => { const child = mockMob('child' + children.length); children.push(child); return child; }; const fn = hooks.hurt.at(-1); for (let i = 0; i < 4; i++) {
+    now += 16000;
+    fn({ hurtEntity: mob, damageSource: { damagingEntity: a } });
+} assert.equal(children.length, 2); assert.equal(mob.dp.get('smp:children'), 2); for (const child of children) {
+    hooks.entitySpawn[0]({ entity: child });
+    assert.equal(child.dp.get('smp:traits_v2'), '');
+    assert.ok(child.tags.has('smp.summoned'));
+} });
+test('registered help command actually opens the updated in-game guide', async () => { responses.push({ canceled: true }); registeredCommands.get('smp:help').callback({ sourceEntity: a }); await new Promise(r => setImmediate(r)); assert.ok(String(forms.at(-1).title).includes('ガイド')); });

@@ -76,4 +76,7 @@ def main():
   c=Canvas(28,28);c.rect(0,0,28,28,'#515962');c.rect(1,1,26,26,'#c2c6c9');c.rect(1,1,25,25,co);c.save('textures/smp/'+name+'.png')
  # Pack icon: upscale the newly drawn chest icon without reading/modifying reference images.
  c=Canvas(64,64);c.rect(0,0,64,64,'ink');c.rect(3,3,58,58,'blue');c.rect(8,8,48,48,'ink');c.rect(12,18,40,34,'brown');c.rect(14,20,36,13,'paper');c.line(12,33,51,33,'ink',3);c.rect(28,28,8,15,'gold');c.save('pack_icon.png')
-if __name__=='__main__':main()
+if __name__=='__main__':
+ main()
+ import shutil
+ shutil.copyfile(R.parent/'vendor/v3_pack_icon.png',R/'pack_icon.png')

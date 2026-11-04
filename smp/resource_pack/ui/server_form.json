@@ -8,7 +8,7 @@
     ],
     "controls": [
       {
-        "native@common_dialogs.main_panel_no_buttons": {
+        "normal@common_dialogs.main_panel_no_buttons": {
           "$title_panel": "common_dialogs.standard_title_label",
           "$title_size": [
             "100% - 14px",
@@ -35,18 +35,7 @@
         }
       },
       {
-        "chest@common_dialogs.main_panel_no_buttons": {
-          "$title_panel": "smp_chest.title",
-          "$title_size": [
-            "100% - 14px",
-            12
-          ],
-          "$child_control": "smp_chest.content",
-          "size": [
-            280,
-            242
-          ],
-          "layer": 2,
+        "chest@smp_native.chest_panel": {
           "bindings": [
             {
               "binding_name": "#title_text"

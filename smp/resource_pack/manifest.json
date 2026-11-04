@@ -1,18 +1,18 @@
 {
   "format_version": 2,
   "header": {
-    "name": "SMP Chest Hub — チェストUI",
+    "name": "SMP Survival — V3チェストUI",
     "description": "54スロットの独自チェストメニューとアイコン",
     "uuid": "8275433f-adfa-5442-a2cb-a3a99070f841",
     "version": [
       0,
-      1,
+      2,
       0
     ],
     "min_engine_version": [
       1,
       21,
-      80
+      110
     ]
   },
   "modules": [
@@ -21,7 +21,7 @@
       "uuid": "ba1d16ad-e838-5ebf-a2ee-c1d1ce08a5f2",
       "version": [
         0,
-        1,
+        2,
         0
       ]
     }

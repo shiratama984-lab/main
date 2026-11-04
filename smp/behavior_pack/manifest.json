@@ -1,18 +1,18 @@
 {
   "format_version": 2,
   "header": {
-    "name": "SMP Chest Hub 0.1.0",
+    "name": "SMP Survival — V3 Edition 0.2.0",
     "description": "チェストUI・オークション・経済・ホーム・土地保護",
     "uuid": "941e4dfa-ccbc-5c72-a2df-d63d5c5192f7",
     "version": [
       0,
-      1,
+      2,
       0
     ],
     "min_engine_version": [
       1,
       21,
-      80
+      110
     ]
   },
   "modules": [
@@ -21,7 +21,7 @@
       "uuid": "6e7599da-54b6-5ecf-bbc1-6bb432ca97a4",
       "version": [
         0,
-        1,
+        2,
         0
       ]
     },
@@ -32,7 +32,7 @@
       "uuid": "d98a1153-a80e-5ae2-83e5-13b700ff68c3",
       "version": [
         0,
-        1,
+        2,
         0
       ]
     }
@@ -40,7 +40,7 @@
   "dependencies": [
     {
       "module_name": "@minecraft/server",
-      "version": "2.0.0"
+      "version": "2.3.0"
     },
     {
       "module_name": "@minecraft/server-ui",
@@ -50,7 +50,7 @@
       "uuid": "8275433f-adfa-5442-a2cb-a3a99070f841",
       "version": [
         0,
-        1,
+        2,
         0
       ]
     }

@@ -8,7 +8,7 @@
     ],
     "controls": [
       {
-        "native@common_dialogs.main_panel_no_buttons": {
+        "normal@common_dialogs.main_panel_no_buttons": {
           "$title_panel": "common_dialogs.standard_title_label",
           "$title_size": [
             "100% - 14px",

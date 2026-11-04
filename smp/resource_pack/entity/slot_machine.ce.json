@@ -1,0 +1,36 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "smp:slot_machine",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/slot_machine"
+      },
+      "geometry": {
+        "default": "geometry.slot_machine"
+      },
+      "animations": {
+        "idle_anim":   "animation.slot_machine.idle",
+        "spin_fast":   "animation.slot_machine.spin_fast",
+        "stop_reel1":  "animation.slot_machine.stop_reel1",
+        "stop_reel2":  "animation.slot_machine.stop_reel2",
+        "stop_reel3":  "animation.slot_machine.stop_reel3",
+        "win_effect":  "animation.slot_machine.win_effect",
+        "lever_pull":  "animation.slot_machine.lever_pull",
+        "main_ctrl":   "controller.animation.slot_machine.main",
+        "lever_ctrl":  "controller.animation.slot_machine.lever"
+      },
+      "scripts": {
+        "animate": ["main_ctrl", "lever_ctrl"]
+      },
+      "render_controllers": ["controller.render.slot_machine"],
+      "spawn_egg": {
+        "base_color": "#FFD700",
+        "overlay_color": "#CC0000"
+      }
+    }
+  }
+}

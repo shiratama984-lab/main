@@ -1,0 +1,188 @@
+{
+  "format_version": "1.10.0",
+  "animations": {
+    "animation.slot_machine.idle": {
+      "loop": true,
+      "bones": {
+        "top_deco": {
+          "rotation": [
+            "math.sin(q.life_time * 80) * 1.5",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.slot_machine.spin_fast": {
+      "loop": true,
+      "bones": {
+        "reel_1": {
+          "rotation": [
+            "v.spin1 * q.life_time * 360",
+            0,
+            0
+          ]
+        },
+        "reel_2": {
+          "rotation": [
+            "v.spin2 * q.life_time * 360",
+            0,
+            0
+          ]
+        },
+        "reel_3": {
+          "rotation": [
+            "v.spin3 * q.life_time * 360",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "animation.slot_machine.stop_reel1": {
+      "loop": false,
+      "animation_length": 0.8,
+      "bones": {
+        "reel_1": {
+          "rotation": {
+            "0.0": [
+              "v.r1_start",
+              0,
+              0
+            ],
+            "0.6": [
+              "v.r1_target + 20",
+              0,
+              0
+            ],
+            "0.8": [
+              "v.r1_target",
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.slot_machine.stop_reel2": {
+      "loop": false,
+      "animation_length": 1.3,
+      "bones": {
+        "reel_2": {
+          "rotation": {
+            "0.0": [
+              "v.r2_start",
+              0,
+              0
+            ],
+            "1.1": [
+              "v.r2_target + 20",
+              0,
+              0
+            ],
+            "1.3": [
+              "v.r2_target",
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.slot_machine.stop_reel3": {
+      "loop": false,
+      "animation_length": 1.8,
+      "bones": {
+        "reel_3": {
+          "rotation": {
+            "0.0": [
+              "v.r3_start",
+              0,
+              0
+            ],
+            "1.6": [
+              "v.r3_target + 20",
+              0,
+              0
+            ],
+            "1.8": [
+              "v.r3_target",
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.slot_machine.win_effect": {
+      "loop": false,
+      "animation_length": 1.2,
+      "bones": {
+        "body": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.1": [
+              0,
+              0,
+              3
+            ],
+            "0.3": [
+              0,
+              0,
+              -3
+            ],
+            "0.5": [
+              0,
+              0,
+              3
+            ],
+            "0.7": [
+              0,
+              0,
+              -3
+            ],
+            "0.9": [
+              0,
+              0,
+              2
+            ],
+            "1.2": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    },
+    "animation.slot_machine.lever_pull": {
+      "loop": false,
+      "animation_length": 0.5,
+      "bones": {
+        "lever_pivot": {
+          "rotation": {
+            "0.0": [
+              0,
+              0,
+              0
+            ],
+            "0.2": [
+              30,
+              0,
+              0
+            ],
+            "0.5": [
+              0,
+              0,
+              0
+            ]
+          }
+        }
+      }
+    }
+  }
+}

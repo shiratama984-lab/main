@@ -1,15 +1,17 @@
 # Minecraft アドオン制作
 
-## SMP Chest Hub 0.1.0
+## SMP Survival — V3 Edition 0.2.0
 
-バニラSMP向けの独立パックです。54スロットのチェストUI、入札・即決オークション、受け取りBOX、ショップ、送金、ホーム、土地共有を追加します。
+ユーザー提供SMP_Addon_v3の全51ファイルを確認して再構成。標準風のチェスト54枠＋持ち物36枠、成長・20スキル・特殊能力モブ・TPA・現物交換バザー・3Dスロット台を追加し、既存オークションも維持しています。
 
-- **[SMPアドオンをダウンロード](downloads/SMP-ChestHub-0.1.0.mcaddon?raw=true)**
-- [SMP導入手順・初版の制限](smp/README.md)
-- [SMP編集用ソース](downloads/SMP-ChestHub-source.zip?raw=true)
-- [SMP実機確認リスト](smp/TESTING.md)
+- **[新版SMPアドオンをダウンロード](downloads/SMP-Survival-0.2.0.mcaddon?raw=true)**
+- [導入手順・仕様](smp/README.md)
+- [V3の確認内容と修正点](smp/REFERENCE_REVIEW.md)
+- [編集用ソース](downloads/SMP-Survival-0.2.0-source.zip?raw=true)
 
-初版のオークションは通常の素材・食料・ブロックが対象です。Windows V26.60のゲーム内表示・動作は未検証です。バックアップ済みテストワールドで確認してください。
+Windows V26.60実機は未検証です。参考元V3のパックとは同時に有効にせず、バックアップしたテストワールドで確認してください。
+
+旧配布物: [SMP Chest Hub 0.1.0](downloads/SMP-ChestHub-0.1.0.mcaddon?raw=true)。既存ワールドを古い版へ戻す場合はワールドバックアップが必要です。
 
 ## 冒険と王国 RPG 0.1.0
 

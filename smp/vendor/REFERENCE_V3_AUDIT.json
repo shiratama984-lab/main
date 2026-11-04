@@ -1,0 +1,311 @@
+{
+  "source": "User-uploaded SMP_Addon_v3.mcaddon",
+  "files": [
+    {
+      "file": "BP/animation_controllers/smp_player.ac.json",
+      "bytes": 566,
+      "sha256": "ce6adf6b47a0333d004cf7ed618189a597d0f0850a9aea5c67e09c59ea9c07c1",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/entities/slot_machine.se.json",
+      "bytes": 1709,
+      "sha256": "5b31c773b691b223c401bd5aa7ae33b8e6fc0febf03456622873888d96354d45",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/items/smp_compass.json",
+      "bytes": 518,
+      "sha256": "27dc0a25a0eff8b9d772d1dee0eefde26f1ebca01381ccf71e41f8d1548d87b9",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/loot_tables/mobs/skill_berserker.json",
+      "bytes": 602,
+      "sha256": "5ba76f63655f24209523e864832dba60ea8f6bfe48abee00a213799288c330ba",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/loot_tables/mobs/skill_iron_wall.json",
+      "bytes": 589,
+      "sha256": "a61aeeb2183739756e6bab66c18fb5f0ab4ef66ef6c10f628bf72f057571d1f6",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/loot_tables/mobs/skill_minecrafter.json",
+      "bytes": 673,
+      "sha256": "ca0a256f2fa2585efc16aa0e694600c03d47b483e89b6cc3fead1efe5e2b8828",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/loot_tables/mobs/skill_rare.json",
+      "bytes": 788,
+      "sha256": "164d11ffe44e1d8826636ff9310e5c1c337a602896fa1b93fbea22fbbb63f894",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/loot_tables/mobs/skill_summon_ally.json",
+      "bytes": 663,
+      "sha256": "f5aa71bc7ecdcd6cd05246d3c381013e92ba6246d41b5009820650f93c311c66",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/manifest.json",
+      "bytes": 783,
+      "sha256": "55300d2690b8475aa0be6eb6c092840f53e26d4716c1cf5acbc76ed1ead07011",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/pack_icon.png",
+      "bytes": 1234,
+      "sha256": "5e192550a4b4a3df63b473bde3bf3dcd2bcc4505dd373b994da10b6151ec5e71",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "BP/scripts/bazaar.js",
+      "bytes": 13279,
+      "sha256": "13bd961141dd43e0135a6de1cfb9048e2aca2223b4d788ebadf0936cf78ee963",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/chest_form.js",
+      "bytes": 5181,
+      "sha256": "7d1f0db517097155218dce46a4608f23d8f61adb2a6289e8f92475eda5bb5425",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/constants.js",
+      "bytes": 6357,
+      "sha256": "4ed068f69e8a3784afd3fad86f1ac00c64fbb557c68c748e10f34bfb47c2c20f",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/data.js",
+      "bytes": 458,
+      "sha256": "88e9f6765b22a2c94a0e6b27b0f7b2ca28adc98e19e68a370df42966ac219b58",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/gamble.js",
+      "bytes": 10728,
+      "sha256": "2a37eac40e1806844117259c8b40902932d2a64351447fc8928b1d68d356fdef",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/hud.js",
+      "bytes": 1212,
+      "sha256": "64d2da81bdb4111ff363264013a3a221f41719336f8d4543be847ec61cc8970e",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/level.js",
+      "bytes": 3533,
+      "sha256": "eac1d94392215ff88e066a03c5505ced6099c8ba67b5dca40d594890074e80f3",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/main.js",
+      "bytes": 10642,
+      "sha256": "fea0efdaaf2794bbc8d4f7c469eae2ec57215d461c3a34692cba49334ddc9e9f",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/mob_ai.js",
+      "bytes": 5738,
+      "sha256": "3f5d7a1e3d6fdf71ac6efb39ef4f8522959b809373d74dfa40c3285005f4de04",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/mob_skills.js",
+      "bytes": 21910,
+      "sha256": "12da0f510d9388eaee9269384f14ca570291a36c42dc1b63193ecfa14f77520a",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/skills.js",
+      "bytes": 11526,
+      "sha256": "aff4869661041e7b0a253c00fdc604dfe49e90ce8d677ee5d50e75aa669c0ee9",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/slot_machine.js",
+      "bytes": 9796,
+      "sha256": "d58183dc9066aa3c7ad352626e425681a448ca8ee8fbbf0cbd996834f1694d5b",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/startup.js",
+      "bytes": 7330,
+      "sha256": "ccc25d3806a2b88be2ea0e02e0396e532f8946b7730fcee6730ae259a0993316",
+      "inspection": "source read"
+    },
+    {
+      "file": "BP/scripts/ui.js",
+      "bytes": 12448,
+      "sha256": "f034b4dba04fb464857a3ad6aecdeb47558128fa8e9544fffbc63ce172a65c5a",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/animation_controllers/slot_machine.ac.json",
+      "bytes": 2223,
+      "sha256": "c3697a5ae415db7229911bb986d863dc7eccf83ab881b30d65c0848fd9b1424f",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/animations/slot_machine.anim.json",
+      "bytes": 2278,
+      "sha256": "b31e6ba4f497074900f90b21ace32ad39ee2113a8ef85064f25a42beb2c2b41c",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/entity/slot_machine.ce.json",
+      "bytes": 1165,
+      "sha256": "02be2a01f670f1072c56adae09e906ea330876c0e22901aee1113badbfeeb130",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/manifest.json",
+      "bytes": 371,
+      "sha256": "b776d76f86110bb587d9d38ee86796a55193b10eb5940b0d94c1c949f325f662",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/models/entity/slot_machine.geo.json",
+      "bytes": 2177,
+      "sha256": "5e5961573cb01a4b2d2490d4a4cc45ad1dba1c78184bd9a6a96a102b1ee42358",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/pack_icon.png",
+      "bytes": 1234,
+      "sha256": "5e192550a4b4a3df63b473bde3bf3dcd2bcc4505dd373b994da10b6151ec5e71",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/particles/smp_levelup_burst.json",
+      "bytes": 1686,
+      "sha256": "e7ed880aa06a1b73f75028ff8f42fc2430c1ef01c06de8f18f6dde6ff8b3bdfb",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/particles/smp_levelup_ring.json",
+      "bytes": 1461,
+      "sha256": "ceefeb3557458ec89cd7469deb9f514173c0745e74cdf22f6e8d493701efb2b0",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/render_controllers/slot_machine.rc.json",
+      "bytes": 236,
+      "sha256": "3b32b33b8330c150809334deb6fe0a5705beca1df4f72bac87338003cebc7610",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/sounds/sound_definitions.json",
+      "bytes": 219,
+      "sha256": "855279bb12abdbc1da7d57a33642c0afac085cd189f90a3b387d118fca02f309",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/texts/en_US.lang",
+      "bytes": 31,
+      "sha256": "bc9247ccaec22ee7409eff101543d7b0e8de3ed1ede4b6065cdace7bdaae302d",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/texts/ja_JP.lang",
+      "bytes": 31,
+      "sha256": "bc9247ccaec22ee7409eff101543d7b0e8de3ed1ede4b6065cdace7bdaae302d",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/texts/languages.json",
+      "bytes": 19,
+      "sha256": "546868d97cdd7b4f145b6dfe74dc6c32aaeb0055ff80d67435cc81438d639086",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/textures/entity/slot_machine.png",
+      "bytes": 1375,
+      "sha256": "7bf84bfe5302980a466321ff57315a73649938af8a6c2244ff5dc4e5aeda842e",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/textures/item_texture.json",
+      "bytes": 168,
+      "sha256": "a871240e85df14e1b2911de0614bdac01c30d2aacfbddb0e2de1bdd32004aeb1",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/textures/items/smp_menu.png",
+      "bytes": 75,
+      "sha256": "50b068e07b4bf235705c19b77da49fdbbc7e98ddc0a46f1c6659cca98c963904",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/textures/ui/d_b.json",
+      "bytes": 30,
+      "sha256": "e36110e75c8a9d894eb9b4e7d4486151dac1c95f7e71c1ff719e5d747bc63950",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/textures/ui/d_b.png",
+      "bytes": 80,
+      "sha256": "014f035a34535c2e47d433e5e3825ba3bb08c8cbb346b775cae1f198bd5426a1",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/textures/ui/d_g.json",
+      "bytes": 30,
+      "sha256": "a0459a666a45ced6e153b78505a9ed09dc7783d2947b19bab6648d854133d5c9",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/textures/ui/d_g.png",
+      "bytes": 80,
+      "sha256": "3f088c3620839bfb6cfc8e35858ab19225da6f0c674a32423d0bed62eb88d090",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/textures/ui/item_background.json",
+      "bytes": 42,
+      "sha256": "0fd7d30dd15969707788fbd6a7ccabbd35bb28864b313ffa3cc1b13e7a1eb3ed",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/textures/ui/item_background.png",
+      "bytes": 111,
+      "sha256": "3e53e69ff176a47d2bd2872c9663efda59ccf6ac0f52bd0d6f791788b3c8f532",
+      "inspection": "image viewed"
+    },
+    {
+      "file": "RP/ui/_global_variables.json",
+      "bytes": 351,
+      "sha256": "580ba2c6153ee8b402bec95c6c8a2bafdc4fb651864cf3381a47ef367a9c50a8",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/ui/_ui_defs.json",
+      "bytes": 97,
+      "sha256": "6daf1293af99a477f9fc27e4ec2fe43a442057fd3c90391d18d1346ce7c074b7",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/ui/chest_inventory_system.json",
+      "bytes": 5808,
+      "sha256": "6b9e0adad97c7125b2444e260d8f0c3926e884630853cf21cfef059b6270a868",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/ui/chest_server_form.json",
+      "bytes": 7584,
+      "sha256": "a16ce7e762fab1fb301f9ff50d01cab119f00b8a64dc5b2bb13bd1dcdc37dbc6",
+      "inspection": "source read"
+    },
+    {
+      "file": "RP/ui/server_form.json",
+      "bytes": 801,
+      "sha256": "6bb0716a5ca286a709e973aa4d9eee7a2dd7f74a385dfcb5a362f3c25c46b244",
+      "inspection": "source read"
+    }
+  ]
+}

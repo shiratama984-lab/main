@@ -1,0 +1,97 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.slot_machine.main": {
+      "initial_state": "idle",
+      "states": {
+        "idle": {
+          "animations": [
+            "idle_anim"
+          ],
+          "transitions": [
+            {
+              "spinning": "q.property('smp:slot_state') == 'spinning'"
+            }
+          ]
+        },
+        "spinning": {
+          "on_entry": [
+            "v.spin1 = 4.0 + math.random(0, 2);",
+            "v.spin2 = 3.5 + math.random(0, 2);",
+            "v.spin3 = 3.0 + math.random(0, 2);"
+          ],
+          "animations": [
+            "spin_fast"
+          ],
+          "transitions": [
+            {
+              "stopping": "q.property('smp:slot_state') == 'stopping'"
+            }
+          ]
+        },
+        "stopping": {
+          "on_entry": [
+            "v.r1_start = math.mod(v.spin1 * q.life_time * 360, 360);",
+            "v.r1_target = q.property('smp:reel1_result') * 60.0;",
+            "v.r2_start = math.mod(v.spin2 * q.life_time * 360, 360);",
+            "v.r2_target = q.property('smp:reel2_result') * 60.0;",
+            "v.r3_start = math.mod(v.spin3 * q.life_time * 360, 360);",
+            "v.r3_target = q.property('smp:reel3_result') * 60.0;"
+          ],
+          "animations": [
+            "stop_reel1",
+            "stop_reel2",
+            "stop_reel3"
+          ],
+          "transitions": [
+            {
+              "result_win": "q.property('smp:slot_state') == 'result_win'"
+            },
+            {
+              "result_lose": "q.property('smp:slot_state') == 'result_lose'"
+            }
+          ]
+        },
+        "result_win": {
+          "animations": [
+            "win_effect"
+          ],
+          "transitions": [
+            {
+              "idle": "q.property('smp:slot_state') == 'idle'"
+            }
+          ]
+        },
+        "result_lose": {
+          "transitions": [
+            {
+              "idle": "q.property('smp:slot_state') == 'idle'"
+            }
+          ]
+        }
+      }
+    },
+    "controller.animation.slot_machine.lever": {
+      "initial_state": "rest",
+      "states": {
+        "rest": {
+          "transitions": [
+            {
+              "pulling": "q.property('smp:slot_state') == 'spinning'"
+            }
+          ]
+        },
+        "pulling": {
+          "animations": [
+            "lever_pull"
+          ],
+          "transitions": [
+            {
+              "rest": "q.any_animation_finished"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

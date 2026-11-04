@@ -3,7 +3,7 @@
   "texture_name": "atlas.items",
   "texture_data": {
     "smp_menu": {
-      "textures": "textures/smp/menu"
+      "textures": "textures/items/compass_item"
     }
   }
 }

@@ -12,28 +12,63 @@ const seller = player('seller'), bob = player('bob'), carol = player('carol');
 players.push(seller, bob, carol);
 async function menu(p, ...rs) { responses.push(...rs); await showHome(p); }
 function count(p, id) { return p.inventory.slots.reduce((n, s) => n + (s?.typeId === id ? s.amount : 0), 0); }
-function empty(p) { for (let i = 0; i < p.inventory.size; i++)
-    p.inventory.setItem(i, undefined); }
-test('all menu screens emit exactly 54 slot buttons with expected navigation', async () => { await menu(seller, { canceled: true }); await menu(bob, { canceled: true }); await menu(carol, { canceled: true }); const home = forms[0]; assert.equal(home.buttons.length, 54); assert.ok(home.buttons[10].text.includes('オークション')); assert.ok(home.buttons[16].text.includes('受け取り')); assert.ok(home.buttons[49].text.includes('口座')); });
-test('ordinary items pass but custom names, lore, properties, locks and unknown NBT are not flattened', () => { const base = new ItemStack('minecraft:diamond', 2); assert.equal(plain(base), true); for (const change of [i => i.nameTag = 'gift', i => i.lore = ['secret'], i => i.dp.x = 1, i => i.lockMode = 'slot', i => i.keepOnDeath = true, i => i.hidden = true, i => i.canDestroy = ['minecraft:stone']]) {
-    const i = base.clone();
-    change(i);
-    assert.equal(plain(i), false);
-} assert.equal(plain(new ItemStack('minecraft:diamond_sword', 1)), false); });
+function empty(p) {
+    for (let i = 0; i < p.inventory.size; i++)
+        p.inventory.setItem(i, undefined);
+}
+test('all menu screens emit 54 menu slots and 36 inventory previews with expected navigation', async () => { await menu(seller, { canceled: true }); await menu(bob, { canceled: true }); await menu(carol, { canceled: true }); const home = forms[0]; assert.equal(home.buttons.length, 90); assert.ok(home.buttons[10].text.includes('オークション')); assert.ok(home.buttons[16].text.includes('受け取り')); assert.ok(home.buttons[49].text.includes('口座')); });
+test('ordinary items pass but custom names, lore, properties, locks and unknown NBT are not flattened', () => {
+    const base = new ItemStack('minecraft:diamond', 2);
+    assert.equal(plain(base), true);
+    for (const change of [i => i.nameTag = 'gift', i => i.lore = ['secret'], i => i.dp.x = 1, i => i.lockMode = 'slot', i => i.keepOnDeath = true, i => i.hidden = true, i => i.canDestroy = ['minecraft:stone']]) {
+        const i = base.clone();
+        change(i);
+        assert.equal(plain(i), false);
+    }
+    assert.equal(plain(new ItemStack('minecraft:diamond_sword', 1)), false);
+});
 test('chest-driven listing removes exactly the selected inventory amount', async () => { seller.inventory.setItem(0, new ItemStack('minecraft:diamond', 4)); responses.push({ selection: 0 }, { formValues: ['2', '50', '150', 0] }, { selection: 0 }, { canceled: true }); await showSell(seller); assert.equal(count(seller, 'minecraft:diamond'), 2); assert.equal(store.state.lots.a1.item.count, 2); assert.equal(store.state.lots.a1.status, 'active'); });
 test('failed listing persistence restores the selected stack without creating a lot', async () => { port.fail = true; responses.push({ selection: 0 }, { formValues: ['2', '50', '150', 0] }, { selection: 0 }); await assert.rejects(showSell(seller)); port.fail = false; assert.equal(count(seller, 'minecraft:diamond'), 2); assert.equal(Object.keys(store.state.lots).length, 1); });
 test('two players bid through chest menus; outbid refunds and instant buyout moves funds once', async () => { store.transaction(s => { m.mint(s, s.players.bob, 200); m.mint(s, s.players.carol, 200); }); responses.push({ selection: 0 }, { selection: 29 }, { formValues: ['50'] }, { selection: 0 }, { canceled: true }); await showAuctions(bob); assert.equal(store.state.players.bob.balance, 250); assert.equal(store.state.lots.a1.bidder, 'bob'); responses.push({ selection: 0 }, { selection: 31 }, { selection: 0 }, { canceled: true }); await showAuctions(carol); assert.equal(store.state.players.bob.balance, 300); assert.equal(store.state.players.carol.balance, 150); assert.equal(store.state.players.seller.balance, 250); assert.equal(store.state.lots.a1.recipient, 'carol'); });
-test('full inventory leaves delivery pending; later collection is exactly once', async () => { for (let i = 0; i < carol.inventory.size; i++)
-    carol.inventory.setItem(i, new ItemStack('minecraft:cobblestone', 64)); responses.push({ selection: 0 }); await assert.rejects(showInbox(carol)); assert.ok(store.state.lots.a1); assert.equal(count(carol, 'minecraft:diamond'), 0); empty(carol); responses.push({ selection: 0 }, { canceled: true }); await showInbox(carol); assert.equal(count(carol, 'minecraft:diamond'), 2); assert.equal(store.state.lots.a1, undefined); responses.push({ selection: 0 }); await showInbox(carol); assert.equal(count(carol, 'minecraft:diamond'), 2); });
+test('full inventory leaves delivery pending; later collection is exactly once', async () => {
+    for (let i = 0; i < carol.inventory.size; i++)
+        carol.inventory.setItem(i, new ItemStack('minecraft:cobblestone', 64));
+    responses.push({ selection: 0 });
+    await assert.rejects(showInbox(carol));
+    assert.ok(store.state.lots.a1);
+    assert.equal(count(carol, 'minecraft:diamond'), 0);
+    empty(carol);
+    responses.push({ selection: 0 }, { canceled: true });
+    await showInbox(carol);
+    assert.equal(count(carol, 'minecraft:diamond'), 2);
+    assert.equal(store.state.lots.a1, undefined);
+    responses.push({ selection: 0 });
+    await showInbox(carol);
+    assert.equal(count(carol, 'minecraft:diamond'), 2);
+});
 test('offline expiration settles against persisted accounts and returns an unsold stack', () => { store.transaction(s => { m.createLot(s, s.players.seller, { id: 'minecraft:iron_ingot', count: 4 }, 20, null, 300000, now); m.createLot(s, s.players.seller, { id: 'minecraft:oak_log', count: 16 }, 20, null, 300000, now); m.bid(s, s.players.bob, 'a2', 20, now + 1); }); const prev = store.state.players.seller.balance; players.splice(players.indexOf(seller), 1); now += 300001; heartbeat(); assert.equal(store.state.players.seller.balance, prev + 20); assert.equal(store.state.lots.a2.recipient, 'bob'); assert.equal(store.state.lots.a3.recipient, 'seller'); assert.equal(new Store(world).state.lots.a2.status, 'sold'); players.push(seller); });
-test('server shop rollback preserves both coins and partial inventory changes', async () => { empty(bob); for (let i = 0; i < bob.inventory.size; i++)
-    bob.inventory.setItem(i, new ItemStack('minecraft:cobblestone', 64)); const before = store.state.players.bob.balance; await assert.rejects(menu(bob, { selection: 12 }, { selection: 15 }, { selection: 29 }, { formValues: ['1'] }, { selection: 0 })); assert.equal(store.state.players.bob.balance, before); assert.equal(count(bob, 'minecraft:bread'), 0); });
+test('server shop rollback preserves both coins and partial inventory changes', async () => {
+    empty(bob);
+    for (let i = 0; i < bob.inventory.size; i++)
+        bob.inventory.setItem(i, new ItemStack('minecraft:cobblestone', 64));
+    const before = store.state.players.bob.balance;
+    await assert.rejects(menu(bob, { selection: 12 }, { selection: 15 }, { selection: 29 }, { formValues: ['1'] }, { selection: 0 }));
+    assert.equal(store.state.players.bob.balance, before);
+    assert.equal(count(bob, 'minecraft:bread'), 0);
+});
 test('teleport cancels on movement and damage, and rechecks safety at arrival', () => { const dest = { dimension: dimension.id, x: 20, y: 64, z: 0 }; startTeleport(bob, dest); bob.location.x += 1; heartbeat(); assert.equal(teleports.has(bob.id), false); bob.location.x = 0; startTeleport(bob, dest); hooks.hurt[0]({ hurtEntity: bob }); assert.equal(teleports.has(bob.id), false); startTeleport(bob, dest); now += 5001; dimension.unsafe = true; heartbeat(); dimension.unsafe = false; assert.equal(bob.teleported, 0); assert.equal(teleports.has(bob.id), false); });
 test('successful teleport saves cooldown; restart and immediate reuse cannot bypass it', () => { startTeleport(bob, { dimension: dimension.id, x: 20, y: 64, z: 0 }); now += 5001; heartbeat(); assert.equal(bob.teleported, 1); assert.equal(bob.location.x, 20); assert.throws(() => startTeleport(bob, { dimension: dimension.id, x: 0, y: 64, z: 0 })); assert.equal(new Store(world).state.players.bob.teleportAfter, now + 30000); });
-test('claim protection stops border placement and untrusted access; shared access succeeds', () => { store.transaction(s => { m.mint(s, s.players.seller, 200); m.buyClaim(s, s.players.seller, dimension.id, 0, 0); }); for (const [x, face] of [[0, 'Up'], [-1, 'East']]) {
-    const e = { player: carol, block: { location: { x, y: 64, z: 0 } }, blockFace: face, cancel: false };
+test('claim protection stops border placement and untrusted access; shared access succeeds', () => {
+    store.transaction(s => { m.mint(s, s.players.seller, 200); m.buyClaim(s, s.players.seller, dimension.id, 0, 0); });
+    for (const [x, face] of [[0, 'Up'], [-1, 'East']]) {
+        const e = { player: carol, block: { location: { x, y: 64, z: 0 } }, blockFace: face, cancel: false };
+        protection(e);
+        assert.equal(e.cancel, true);
+    }
+    store.transaction(s => m.trust(s, s.players.seller, 'minecraft:overworld:0:0', 'carol', true));
+    const e = { player: carol, block: { location: { x: 0, y: 64, z: 0 } }, cancel: false };
     protection(e);
-    assert.equal(e.cancel, true);
-} store.transaction(s => m.trust(s, s.players.seller, 'minecraft:overworld:0:0', 'carol', true)); const e = { player: carol, block: { location: { x: 0, y: 64, z: 0 } }, cancel: false }; protection(e); assert.equal(e.cancel, false); });
+    assert.equal(e.cancel, false);
+});
 test('menu item and block-use event in the same tick open only one chest', async () => { forms.length = 0; responses.push({ canceled: true }); system.currentTick = 500; hooks.itemUse[0]({ source: seller, itemStack: { typeId: 'smp:menu' } }); hooks.interact[0]({ player: seller, itemStack: { typeId: 'smp:menu' } }); await new Promise(r => setImmediate(r)); assert.equal(forms.length, 1); });
 test('compact compatibility mode preserves slot handlers while removing blank cells', async () => { const { Chest } = await import('../behavior_pack/scripts/chest.js'); seller.addTag('smp.standard_ui'); let selected = false; const chest = new Chest('test').slot(49, '戻る', 'previous', () => { selected = true; }); responses.push({ selection: 0 }); await chest.show(seller); assert.equal(forms.at(-1).buttons.length, 1); assert.equal(selected, true); assert.ok(!forms.at(-1).title.includes('[SMP:CHEST]')); seller.removeTag('smp.standard_ui'); });

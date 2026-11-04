@@ -18,7 +18,8 @@
         "use_duration": 0.1,
         "movement_modifier": 1
       },
-      "minecraft:use_animation": "bow"
+      "minecraft:use_animation": "bow",
+      "smp:open_menu_v2": {}
     }
   }
 }

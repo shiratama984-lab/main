@@ -1,0 +1,98 @@
+{
+  "format_version": "1.21.0",
+  "minecraft:geometry": [
+    {
+      "description": {
+        "identifier": "geometry.slot_machine",
+        "texture_width": 64,
+        "texture_height": 128,
+        "visible_bounds_width": 2,
+        "visible_bounds_height": 2.5,
+        "visible_bounds_offset": [0, 1, 0]
+      },
+      "bones": [
+        {
+          "name": "root",
+          "pivot": [0, 0, 0]
+        },
+        {
+          "name": "body",
+          "parent": "root",
+          "pivot": [0, 0, 0],
+          "cubes": [
+            {
+              "origin": [-8, 0, -4],
+              "size": [16, 24, 8],
+              "uv": [0, 0]
+            }
+          ]
+        },
+        {
+          "name": "top_deco",
+          "parent": "body",
+          "pivot": [0, 24, 0],
+          "cubes": [
+            {
+              "origin": [-6, 24, -3],
+              "size": [12, 4, 6],
+              "uv": [0, 32]
+            }
+          ]
+        },
+        {
+          "name": "lever_pivot",
+          "parent": "body",
+          "pivot": [10, 14, 0],
+          "cubes": [
+            {
+              "origin": [8, 8, -1],
+              "size": [2, 12, 2],
+              "uv": [48, 0]
+            },
+            {
+              "origin": [7, 18, -2],
+              "size": [4, 4, 4],
+              "uv": [48, 14]
+            }
+          ]
+        },
+        {
+          "name": "reel_1",
+          "parent": "body",
+          "pivot": [-5, 14, -4],
+          "cubes": [
+            {
+              "origin": [-8, 8, -5],
+              "size": [6, 12, 1],
+              "uv": [0, 64]
+            }
+          ]
+        },
+        {
+          "name": "reel_2",
+          "parent": "body",
+          "pivot": [0, 14, -4],
+          "cubes": [
+            {
+              "origin": [-3, 8, -5],
+              "size": [6, 12, 1],
+              "uv": [16, 64]
+            }
+          ]
+        },
+        {
+          "name": "reel_3",
+          "parent": "body",
+          "pivot": [5, 14, -4],
+          "cubes": [
+            {
+              "origin": [2, 8, -5],
+              "size": [6, 12, 1],
+              "uv": [32, 64]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

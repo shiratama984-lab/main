@@ -1,0 +1,4 @@
+{
+  "$smp_show_inventory": true,
+  "$smp_border_texture": "textures/ui/dialog_background_opaque"
+}
