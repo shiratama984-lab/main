@@ -1,0 +1,16 @@
+{
+  "name": "millenaire-bedrock-prototype",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 tools/package.py",
+    "check": "tsc --noEmit",
+    "test": "python3 tools/test.py"
+  },
+  "devDependencies": {
+    "@minecraft/server": "2.0.0",
+    "@minecraft/server-ui": "2.0.0",
+    "@minecraft/vanilla-data": "^1.21.80",
+    "typescript": "5.8.3"
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "millenaire:resident",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "norman_0": "textures/entity/norman_0",
+        "norman_1": "textures/entity/norman_1",
+        "norman_2": "textures/entity/norman_2",
+        "japanese_0": "textures/entity/japanese_0",
+        "japanese_1": "textures/entity/japanese_1",
+        "japanese_2": "textures/entity/japanese_2",
+        "indian_0": "textures/entity/indian_0",
+        "indian_1": "textures/entity/indian_1",
+        "indian_2": "textures/entity/indian_2",
+        "mayan_0": "textures/entity/mayan_0",
+        "mayan_1": "textures/entity/mayan_1",
+        "mayan_2": "textures/entity/mayan_2",
+        "byzantines_0": "textures/entity/byzantines_0",
+        "byzantines_1": "textures/entity/byzantines_1",
+        "byzantines_2": "textures/entity/byzantines_2",
+        "seljuk_0": "textures/entity/seljuk_0",
+        "seljuk_1": "textures/entity/seljuk_1",
+        "seljuk_2": "textures/entity/seljuk_2",
+        "inuits_0": "textures/entity/inuits_0",
+        "inuits_1": "textures/entity/inuits_1",
+        "inuits_2": "textures/entity/inuits_2"
+      },
+      "geometry": {
+        "default": "geometry.millenaire.resident"
+      },
+      "animations": {
+        "walk": "animation.millenaire.walk",
+        "look": "animation.common.look_at_target"
+      },
+      "scripts": {
+        "animate": [
+          "walk",
+          "look"
+        ]
+      },
+      "render_controllers": [
+        "controller.render.millenaire"
+      ]
+    }
+  }
+}

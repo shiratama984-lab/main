@@ -1,0 +1,43 @@
+{
+  "format_version": "1.8.0",
+  "render_controllers": {
+    "controller.render.millenaire": {
+      "arrays": {
+        "textures": {
+          "Array.skins": [
+            "Texture.norman_0",
+            "Texture.norman_1",
+            "Texture.norman_2",
+            "Texture.japanese_0",
+            "Texture.japanese_1",
+            "Texture.japanese_2",
+            "Texture.indian_0",
+            "Texture.indian_1",
+            "Texture.indian_2",
+            "Texture.mayan_0",
+            "Texture.mayan_1",
+            "Texture.mayan_2",
+            "Texture.byzantines_0",
+            "Texture.byzantines_1",
+            "Texture.byzantines_2",
+            "Texture.seljuk_0",
+            "Texture.seljuk_1",
+            "Texture.seljuk_2",
+            "Texture.inuits_0",
+            "Texture.inuits_1",
+            "Texture.inuits_2"
+          ]
+        }
+      },
+      "geometry": "Geometry.default",
+      "materials": [
+        {
+          "*": "Material.default"
+        }
+      ],
+      "textures": [
+        "Array.skins[query.variant]"
+      ]
+    }
+  }
+}

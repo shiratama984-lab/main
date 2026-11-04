@@ -1,0 +1,1 @@
+export const cultures = [{"id": "norman", "name": "ノルマン", "skins": 3}, {"id": "japanese", "name": "日本", "skins": 3}, {"id": "indian", "name": "インド", "skins": 3}, {"id": "mayan", "name": "マヤ", "skins": 3}, {"id": "byzantines", "name": "ビザンティン", "skins": 3}, {"id": "seljuk", "name": "セルジューク", "skins": 3}, {"id": "inuits", "name": "イヌイット", "skins": 3}];

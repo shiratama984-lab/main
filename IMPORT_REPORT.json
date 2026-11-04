@@ -1,0 +1,189 @@
+{
+  "norman_hall": {
+    "source": "millenaire/cultures/norman/buildings/townhalls/guildhouse_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_dirt": "minecraft:gravel",
+      "millenaire:path_gravel": "minecraft:gravel",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "millenaire:mock_chest": "minecraft:air",
+      "minecraft:oak_fence_gate": "minecraft:fence_gate",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "millenaire:mock_banner_wall": "minecraft:air"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "norman_house": {
+    "source": "millenaire/cultures/norman/buildings/houses/lumbermanhut_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "japanese_hall": {
+    "source": "millenaire/cultures/japanese/buildings/townhalls/japanesepalace_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_gravel": "minecraft:gravel",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "millenaire:mock_banner_wall": "minecraft:air"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "japanese_house": {
+    "source": "millenaire/cultures/japanese/buildings/houses/japanesepeasanth_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_dirt": "minecraft:gravel",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "indian_hall": {
+    "source": "millenaire/cultures/indian/buildings/townhalls/chiefhouse_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_dirt": "minecraft:gravel",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:wooden_bars": "minecraft:oak_planks",
+      "millenaire:mock_banner_wall": "minecraft:air"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "indian_house": {
+    "source": "millenaire/cultures/indian/buildings/houses/sugarplantation_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:mock_soil": "minecraft:air",
+      "millenaire:path_dirt": "minecraft:gravel",
+      "millenaire:mud_brick_wall": "minecraft:mud_bricks"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "mayan_hall": {
+    "source": "millenaire/cultures/mayan/buildings/townhalls/mayanacropolis_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "minecraft:cobblestone_stairs": "minecraft:stone_stairs",
+      "minecraft:oak_door": "minecraft:wooden_door",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "millenaire:mock_banner_wall": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "mayan_house": {
+    "source": "millenaire/cultures/mayan/buildings/houses/mayancrafter_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_dirt": "minecraft:gravel",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "byzantines_hall": {
+    "source": "millenaire/cultures/byzantines/buildings/townhalls/kastron_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_gravel": "minecraft:gravel",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "millenaire:mock_banner_wall": "minecraft:air",
+      "minecraft:cobblestone_stairs": "minecraft:stone_stairs"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "byzantines_house": {
+    "source": "millenaire/cultures/byzantines/buildings/houses/workerhouse_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:path_gravel": "minecraft:gravel",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "millenaire:mock_chest": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch",
+      "minecraft:cobblestone_stairs": "minecraft:stone_stairs",
+      "millenaire:mock_facing_marker": "minecraft:air"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "seljuk_hall": {
+    "source": "millenaire/cultures/seljuk/buildings/townhalls/thmosque_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:mud_brick_stairs": "minecraft:mud_bricks",
+      "millenaire:mock_chest": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "millenaire:mud_brick_slab": "minecraft:mud_bricks",
+      "millenaire:mock_banner_wall": "minecraft:air",
+      "minecraft:white_bed": "minecraft:bed"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "seljuk_house": {
+    "source": "millenaire/cultures/seljuk/buildings/houses/cesme_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:mud_brick_slab": "minecraft:mud_bricks",
+      "millenaire:mud_brick_stairs": "minecraft:mud_bricks"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "inuits_hall": {
+    "source": "millenaire/cultures/inuits/buildings/townhalls/player_tannery_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:snow_brick": "minecraft:oak_planks",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:fire_pit": "minecraft:oak_planks",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "millenaire:mock_facing_marker": "minecraft:air",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:snow_wall": "minecraft:oak_planks"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  },
+  "inuits_house": {
+    "source": "millenaire/cultures/inuits/buildings/houses/lumberman_a_0.nbt",
+    "substitutions": {
+      "millenaire:mock_marker": "minecraft:air",
+      "millenaire:snow_brick": "minecraft:oak_planks",
+      "millenaire:mock_chest": "minecraft:air",
+      "millenaire:straw_bed": "minecraft:oak_planks",
+      "minecraft:wall_torch": "minecraft:torch",
+      "millenaire:mock_facing_marker": "minecraft:air"
+    },
+    "states_omitted": false,
+    "state_conversion": "stairs, logs, slabs, doors, beds, torches, trapdoors; other states defaulted"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "resource_pack_name": "millenaire_bedrock",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "summoning_wand": {
+      "textures": "textures/items/summoning_wand"
+    },
+    "denier": {
+      "textures": "textures/items/denier"
+    }
+  }
+}
