@@ -5,6 +5,7 @@ export const port = { fail: false, getDynamicProperty: k => props.get(k), setDyn
             throw Error('Disk full');
         props.set(k, v);
     } };
+export const ItemLockMode = { slot: 'slot', inventory: 'inventory', none: 'none' };
 export class ItemStack {
     constructor(typeId, amount = 1) { this.typeId = typeId; this.maxAmount = typeId === 'smp:menu' ? 1 : ['minecraft:ender_pearl', 'minecraft:snowball', 'minecraft:egg'].includes(typeId) ? 16 : 64; this.amount = Math.min(amount, this.maxAmount); this.nameTag = undefined; this.lockMode = 'none'; this.keepOnDeath = false; this.lore = []; this.dp = {}; this.canDestroy = []; this.canPlace = []; this.hidden = false; }
     get isStackable() { return this.maxAmount > 1 && !this.nameTag && !this.lore.length && !Object.keys(this.dp).length && !this.hidden; }

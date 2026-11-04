@@ -1,13 +1,13 @@
 {
   "format_version": 2,
   "header": {
-    "name": "SMP Survival — V3 Edition 0.2.0",
+    "name": "SMP Survival — V3 Edition 0.2.1",
     "description": "チェストUI・オークション・経済・ホーム・土地保護",
     "uuid": "941e4dfa-ccbc-5c72-a2df-d63d5c5192f7",
     "version": [
       0,
       2,
-      0
+      1
     ],
     "min_engine_version": [
       1,
@@ -22,7 +22,7 @@
       "version": [
         0,
         2,
-        0
+        1
       ]
     },
     {
@@ -33,7 +33,7 @@
       "version": [
         0,
         2,
-        0
+        1
       ]
     }
   ],
@@ -51,7 +51,7 @@
       "version": [
         0,
         2,
-        0
+        1
       ]
     }
   ]

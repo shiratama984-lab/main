@@ -394,7 +394,7 @@
       },
       {
         "binding_type": "view",
-        "source_property_name": "(#form_button_text - ('%.14s' * #form_button_text))",
+        "source_property_name": "(#form_button_text - ('%.15s' * #form_button_text))",
         "target_property_name": "#hover_text"
       },
       {
@@ -463,7 +463,7 @@
             },
             {
               "binding_type": "view",
-              "source_property_name": "(('%.14s' * #form_button_text) - ('%.12s' * #form_button_text))",
+              "source_property_name": "(('%.15s' * #form_button_text) - ('%.13s' * #form_button_text))",
               "target_property_name": "#ratio"
             },
             {
@@ -492,7 +492,7 @@
             1
           ],
           "shadow": true,
-          "text_alignment": "left",
+          "text_alignment": "right",
           "anchor_from": "bottom_right",
           "anchor_to": "bottom_right",
           "color": [
@@ -522,13 +522,13 @@
             {
               "binding_name": "#null",
               "binding_type": "view",
-              "source_property_name": "((not (#form_button_text = '')) and ((#form_button_text - 'stack#01') = #form_button_text))",
+              "source_property_name": "((not (#form_button_text = '')) and (not (('%.9s' * #form_button_text) = 'stack#  1')))",
               "target_property_name": "#visible"
             },
             {
               "binding_name": "#null",
               "binding_type": "view",
-              "source_property_name": "((('%.8s' * #form_button_text) - ('%.6s' * #form_button_text)) * 1)",
+              "source_property_name": "(('%.9s' * #form_button_text) - ('%.6s' * #form_button_text))",
               "target_property_name": "#stack_size"
             }
           ]

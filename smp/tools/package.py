@@ -16,7 +16,7 @@ for directory,label in [('behavior_pack','SMP_ChestHub_BP'),('resource_pack','SM
  data=archive(files)
  with zipfile.ZipFile(io.BytesIO(data)) as z:assert z.testzip() is None;assert 'manifest.json' in z.namelist()
  parts.append((label+'.mcpack',data))
-addon=D/'SMP-Survival-0.2.0.mcaddon';addon.write_bytes(archive(parts))
+addon=D/'SMP-Survival-0.2.1.mcaddon';addon.write_bytes(archive(parts))
 source=[]
 for directory in ['behavior_pack','resource_pack','tools','tests','vendor']:
  for p in (R/directory).rglob('*'):
@@ -24,6 +24,6 @@ for directory in ['behavior_pack','resource_pack','tools','tests','vendor']:
 for name in ['README.md','TESTING.md','VALIDATION.md','CREDITS.md','REFERENCE_REVIEW.md','package.json','package-lock.json','tsconfig.json']:
  p=R/name
  if p.exists():source.append((name,p.read_bytes()))
-(D/'SMP-Survival-0.2.0-source.zip').write_bytes(archive(source))
+(D/'SMP-Survival-0.2.1-source.zip').write_bytes(archive(source))
 print(addon,addon.stat().st_size,'bytes')
 print('SHA256',hashlib.sha256(addon.read_bytes()).hexdigest())

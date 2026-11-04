@@ -1,13 +1,13 @@
 # Minecraft アドオン制作
 
-## SMP Survival — V3 Edition 0.2.0
+## SMP Survival — V3 Edition 0.2.1
 
 ユーザー提供SMP_Addon_v3の全51ファイルを確認して再構成。標準風のチェスト54枠＋持ち物36枠、成長・20スキル・特殊能力モブ・TPA・現物交換バザー・3Dスロット台を追加し、既存オークションも維持しています。
 
-- **[新版SMPアドオンをダウンロード](downloads/SMP-Survival-0.2.0.mcaddon?raw=true)**
+- **[新版SMPアドオンをダウンロード](downloads/SMP-Survival-0.2.1.mcaddon?raw=true)**
 - [導入手順・仕様](smp/README.md)
 - [V3の確認内容と修正点](smp/REFERENCE_REVIEW.md)
-- [編集用ソース](downloads/SMP-Survival-0.2.0-source.zip?raw=true)
+- [編集用ソース](downloads/SMP-Survival-0.2.1-source.zip?raw=true)
 
 Windows V26.60実機は未検証です。参考元V3のパックとは同時に有効にせず、バックアップしたテストワールドで確認してください。
 

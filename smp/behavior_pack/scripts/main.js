@@ -89,7 +89,7 @@ async function showLot(p, id) {
         return showAuctions(p);
     }
     const c = new Chest('オークション #' + id, `${label(l.item.id)} ×${l.item.count} | 出品者 ${user(l.seller)}\n最高 ${l.bid} C / 最低入札 ${m.minimum(l)} C / 残り ${timeLeft(l)}`)
-        .slot(13, `${label(l.item.id)} ×${l.item.count}\n最高入札者 ${l.bidder ? user(l.bidder) : 'なし'}\n即決 ${l.buyout ?? 'なし'}`, itemIcon(l.item.id));
+        .slot(13, `${label(l.item.id)} ×${l.item.count}\n最高入札者 ${l.bidder ? user(l.bidder) : 'なし'}\n即決 ${l.buyout ?? 'なし'}`, itemIcon(l.item.id), undefined, l.item.count);
     if (l.seller !== p.id) {
         c.slot(29, '入札する\n最高額を更新', 'hammer', async () => {
             const r = await new ModalFormData().title('入札 #' + id).textField('入札額（現在の最低 ' + m.minimum(store.state.lots[id] ?? l) + ' C）', String(m.minimum(l))).show(p);
@@ -139,12 +139,12 @@ export async function showSell(p) {
             inventory(p, (inv, s, d) => { const item = takeSlot(inv, slot, id, n); m.createLot(s, d, item, start, buyout, ms, Date.now()); });
             tell(p, '出品しました。');
             return showAuctions(p, 0, true);
-        });
+        }, count);
     }
     return c.slot(49, '戻る', 'previous', () => showAuctions(p)).show(p);
 }
 export async function showInbox(p, page = 0) { settleNow(); const lots = Object.values(store.state.lots).filter(l => l.status !== 'active' && l.recipient === p.id), parcels = Object.values(store.state.parcels ?? {}).filter(l => l.recipient === p.id); const entries = [...lots.map(l => ({ id: l.id, item: l.item, reason: l.status === 'sold' ? '落札品' : '返却品', parcel: false })), ...parcels.map(l => ({ ...l, parcel: true }))]; return pageChest('受け取りBOX', `${entries.length}件 / クリックで回収`, entries.map(l => ({ text: `${label(l.item.id)} ×${l.item.count}\n${l.reason}`, icon: itemIcon(l.item.id), count: l.item.count, handler: async () => { inventory(p, (inv, s, d) => { const item = l.parcel ? claimParcel(s, d, l.id) : m.claimDelivery(s, d, l.id); give(inv, item.id, item.count); }); tell(p, 'アイテムを受け取りました。'); return showInbox(p, page); } })), page, n => showInbox(p, n)).slot(49, 'メニューへ戻る', 'menu', () => showHome(p)).show(p); }
-async function showShop(p) { const c = new Chest('サーバーショップ', `残高 ${current(p).balance} C | 商品を選択`); SHOP.forEach((g, i) => c.slot(10 + i, `${g.name} ×${g.count}\n購入 ${g.buy} C / 売却 ${g.sell} C`, g.icon, () => showProduct(p, g.id))); return c.slot(49, 'メニューへ戻る', 'menu', () => showHome(p)).show(p); }
+async function showShop(p) { const c = new Chest('サーバーショップ', `残高 ${current(p).balance} C | 商品を選択`); SHOP.forEach((g, i) => c.slot(10 + i, `${g.name} ×${g.count}\n購入 ${g.buy} C / 売却 ${g.sell} C`, g.icon, () => showProduct(p, g.id), g.count)); return c.slot(49, 'メニューへ戻る', 'menu', () => showHome(p)).show(p); }
 async function showProduct(p, id) {
     const g = SHOP.find(g => g.id === id);
     if (!g)
@@ -166,7 +166,7 @@ async function showProduct(p, id) {
         tell(p, '取引しました。');
         return showShop(p);
     };
-    return new Chest(g.name, `1組 ${g.count}個 / 残高 ${current(p).balance} C`).slot(13, g.name, g.icon).slot(29, `購入 ${g.buy} C`, 'buy', () => trade('buy')).slot(33, `売却 ${g.sell} C`, 'sell', () => trade('sell')).slot(49, 'ショップへ戻る', 'previous', () => showShop(p)).show(p);
+    return new Chest(g.name, `1組 ${g.count}個 / 残高 ${current(p).balance} C`).slot(13, g.name, g.icon, undefined, g.count).slot(29, `購入 ${g.buy} C`, 'buy', () => trade('buy')).slot(33, `売却 ${g.sell} C`, 'sell', () => trade('sell')).slot(49, 'ショップへ戻る', 'previous', () => showShop(p)).show(p);
 }
 async function showWallet(p) {
     return new Chest('ウォレット', `残高 ${current(p).balance} C\n入札中の預り金は残高から除かれます。売上・返金は自動入金。`).slot(13, `${current(p).balance} C`, 'coin').slot(31, '送金する', 'send', async () => {

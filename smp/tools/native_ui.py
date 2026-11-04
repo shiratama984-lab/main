@@ -16,12 +16,18 @@ def generate():
  chest['cell']['texture']='textures/smp/v3/item_background'
  chest['durability_bar']['texture']='textures/smp/v3/d_b'
  val=chest['durability_bar']['controls'][0]['val'];val['texture']='textures/smp/v3/d_g'
- val['bindings'][2]['source_property_name']="(('%.14s' * #form_button_text) - ('%.12s' * #form_button_text))"
- amount=chest['inventory_button_amount']['controls'][0]['item_amount'];amount['bindings'][-1]['source_property_name']="((('%.8s' * #form_button_text) - ('%.6s' * #form_button_text)) * 1)"
- amount['bindings'][-2]['source_property_name']="((not (#form_button_text = '')) and ((#form_button_text - 'stack#01') = #form_button_text))"
+ val['bindings'][2]['source_property_name']="(('%.15s' * #form_button_text) - ('%.13s' * #form_button_text))"
+ amount=chest['inventory_button_amount']['controls'][0]['item_amount'];amount['bindings'][-1]['source_property_name']="(('%.9s' * #form_button_text) - ('%.6s' * #form_button_text))"
+ amount['bindings'][-2]['source_property_name']="((not (#form_button_text = '')) and (not (('%.9s' * #form_button_text) = 'stack#  1')))"
  chest['durability_bar']['bindings'][-1]['source_property_name']="((not (#form_button_text = '')) and ((#form_button_text - 'dur#00') = #form_button_text))"
  chest['chest_label']['color']=[0.2,0.2,0.2]
  amount['color']=[1,1,1]
+ amount['text_alignment']='right'
+ for control in chest.values():
+  if isinstance(control,dict):
+   for b in control.get('bindings',[]):
+    if b.get('source_property_name') == "(#form_button_text - ('%.14s' * #form_button_text))":
+     b['source_property_name']="(#form_button_text - ('%.15s' * #form_button_text))"
  for name,data in [('chest_server_form.json',chest),('chest_inventory_system.json',inventory)]:
   (R/'resource_pack/ui'/name).write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n')
  globals={'$smp_show_inventory':True,'$smp_border_texture':'textures/ui/dialog_background_opaque'}

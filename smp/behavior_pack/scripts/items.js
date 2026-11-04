@@ -1,4 +1,4 @@
-import { ItemStack } from '@minecraft/server';
+import { ItemStack, ItemLockMode } from '@minecraft/server';
 import { COMMODITIES } from './data.js';
 import { check } from './model.js';
 export function plain(item) {
@@ -41,11 +41,26 @@ export function removePlain(inv, id, n) {
         }
     }
 }
+export function lockMenu(item) {
+    if (item?.typeId === 'smp:menu') { item.lockMode = ItemLockMode.slot; item.keepOnDeath = true; }
+    return item;
+}
+export function protectMenus(inv, preferHotbar) {
+    for (let i = 0; i < inv.size; i++) {
+        const item = inv.getItem(i);
+        if (item?.typeId !== 'smp:menu') continue;
+        const target = preferHotbar && i !== 8 && !inv.getItem(8) ? 8 : i;
+        if (target !== i || item.lockMode !== ItemLockMode.slot || !item.keepOnDeath) {
+            inv.setItem(target, lockMenu(item));
+            if (target !== i) inv.setItem(i, undefined);
+        }
+    }
+}
 export function give(inv, id, n) {
     while (n) {
         const item = new ItemStack(id, 1), size = Math.min(n, item.maxAmount);
         item.amount = size;
-        check(!inv.addItem(item), 'インベントリに空きを作ってください。');
+        check(!inv.addItem(lockMenu(item)), 'インベントリに空きを作ってください。');
         n -= size;
     }
 }

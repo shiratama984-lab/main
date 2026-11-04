@@ -1,3 +1,4 @@
+import { protectMenus } from '../items.js';
 import { world, system, ItemStack, EntityDamageCause } from '@minecraft/server';
 import { MINE_XP, COMBAT_XP, FARM_RIPE_STATES, FARM_XP } from './constants.js';
 import { read, change, award, getTitle, skillLevel, xpNeeded } from './core.js';
@@ -127,16 +128,7 @@ export function installProgression(api) {
                             gain(p, xp * 20, 'explore');
                     }
                 }
-                if (d.menuHotbar && inv) {
-                    const slot = inv?.getItem(8);
-                    if (!slot) {
-                        const existing = Array.from({ length: inv.size }, (_, i) => i).find(i => inv.getItem(i)?.typeId === 'smp:menu');
-                        if (existing !== undefined) {
-                            inv.setItem(8, inv.getItem(existing));
-                            inv.setItem(existing, undefined);
-                        }
-                    }
-                }
+                if (inv) protectMenus(inv, d.menuHotbar);
             });
     }, 20);
     system.runInterval(() => { for (const p of world.getPlayers())
